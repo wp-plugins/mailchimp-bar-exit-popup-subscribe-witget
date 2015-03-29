@@ -1,10 +1,10 @@
 === Mailchimp Bar + Exit Popup | Subscribe Witget ===
 Contributors: schemotechnik, ilya_v, frenly_girl
 Donate link: http://profitquery.com/subscribe_witgets.html
-Tags: contact, email,  multilingual, profitquery, profitquery widgets, bar, mailchimp bar, exit popup, exit, subscribe,  mailchimp subscribe,  subscribers, widget, widgets, aio widget, aio, growth tools, boost, growth widgets, e-mail, email, email tools, google analytics, wordpress, mailchimp, mailchimp for wordpress, mailchimp for wp, MailChimp form, mailchimp sign-up, mailchimp subscribe buddypress, newsletter, newsletter form, newsletter sign-up,  woocommerce
+Tags: AJAX, contact, email,  multilingual, profitquery, profitquery widgets, bar, mailchimp bar, exit popup, exit, subscribe,  mailchimp subscribe,  subscribers, widget, widgets, aio widget, aio, growth tools, boost, growth widgets, e-mail, email, email tools, google analytics, wordpress, mailchimp, mailchimp for wordpress, mailchimp for wp, MailChimp form, mailchimp sign-up, mailchimp subscribe buddypress, newsletter, newsletter form, newsletter sign-up,  woocommerce
 Requires at least: 2.9
 Tested up to: 4.1.1
-Stable tag: 1.0
+Stable tag: 1.0.1
 License: GPL 2. See License below for copyright jots and tittles.
 
 Simply widgets for growth 3x website subscribers, collect customers email, folllowers in social media and all for free.
@@ -107,17 +107,25 @@ Yes, it's free.
 
 = Do I need to create an account? =
 
-No.
+No. All needfull information profitquery get automatically. That's why Profitquery can generate secure apiKey without any sign-up.
 
 = Is JavaScript required? =
 
 All of the options required through this plugin require javascript. JavaScript must be enabled. We load the actual interface via JavaScript at run-time, which allows us to upgrade the functionality of the all tools itself automatically everywhere.
 
 == Screenshots ==
-
+1. Subscribe Bar
+2. Subscribe customization
+3. Exit popup
+4. Exit popup customization
+5. Simply mailchimp integration
+6. After success Follow/Thank popup customization
+7. Many color, size, type popups
+8. Many header images popup
 
 == Changelog ==
-
+= 1.0.1 =
+JS update
 
 == PHP Version ==
 
