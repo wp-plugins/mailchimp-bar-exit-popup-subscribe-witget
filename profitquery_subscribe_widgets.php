@@ -101,7 +101,7 @@ function profitquery_subscribe_widgets_insert_code(){
 		'disabled'=>1		
 	);	
 	
-	if(!(int)$profitquery[share_widgets_loaded]){
+	if((int)$profitquery[share_widgets_loaded] == 0){
 		$profitquerySmartWidgetsStructure['sharingSideBarOptions'] = array(
 			'disabled'=>1		
 		);
@@ -128,7 +128,7 @@ function profitquery_subscribe_widgets_insert_code(){
 			'afterProfitLoader'=>stripslashes($preparedObject[afterProceed])
 		);	
 	}
-	if(!(int)$profitquery[feedback_widgets_loaded]){
+	if((int)$profitquery[feedback_widgets_loaded] == 0){
 		$profitquerySmartWidgetsStructure['phoneCollectOptions'] = array(
 			'disabled'=>1		
 		);
