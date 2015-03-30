@@ -1,10 +1,10 @@
-=== Mailchimp Bar + Exit Popup | Subscribe Witget ===
+=== Mailchimp Bar + Exit Popup | Subscribe Widget ===
 Contributors: schemotechnik, ilya_v, frenly_girl
 Donate link: http://profitquery.com/subscribe_witgets.html
 Tags: AJAX, contact, email,  multilingual, profitquery, profitquery widgets, bar, mailchimp bar, exit popup, exit, subscribe,  mailchimp subscribe,  subscribers, widget, widgets, aio widget, aio, growth tools, boost, growth widgets, e-mail, email, email tools, google analytics, wordpress, mailchimp, mailchimp for wordpress, mailchimp for wp, MailChimp form, mailchimp sign-up, mailchimp subscribe buddypress, newsletter, newsletter form, newsletter sign-up,  woocommerce, free widgets, free
 Requires at least: 2.9
 Tested up to: 4.1.1
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 License: GPL 2. See License below for copyright jots and tittles.
 
 Simply widgets for growth 3x website subscribers, collect customers email, folllowers in social media and all for free.
@@ -124,6 +124,9 @@ All of the options required through this plugin require javascript. JavaScript m
 8. Many header images popup
 
 == Changelog ==
+
+= 1.0.4 =
+title error fix
 
 = 1.0.3 =
 profitquery js lib update
