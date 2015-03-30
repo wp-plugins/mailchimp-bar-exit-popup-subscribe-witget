@@ -23,7 +23,7 @@
 * @package  Wordpress_Plugin
 * @author   ShemOtechnik Profitquery Team <support@profitquery.com>
 * @license  http://www.php.net/license/3_01.txt  PHP License 3.01
-* @version  SVN: 1.0.1
+* @version  SVN: 1.0.2
 */
 
 class ProfitQuerySubscribeWidgetsClass
@@ -217,9 +217,14 @@ class ProfitQuerySubscribeWidgetsClass
 	
 	function setDefaultProductData(){
 		//Other default params		
-		
-		if(!$this->_options[subscribeExit]) $this->_options[subscribeExit][disabled] = 1;		
+				
 		if(!$this->_options[follow]) $this->_options[follow][disabled] = 1;
+		
+		if(!$this->_options[subscribeBar]){
+			$this->_options[subscribeBar][disabled] = 1;
+			$this->_options[subscribeBar][background] = 'bg_red';
+			$this->_options[subscribeBar][button_color] = 'btn_black';			
+		}
 		
 		if(!$this->_options[thankPopup]){
 			$this->_options[thankPopup][disabled] = 1;
@@ -229,10 +234,8 @@ class ProfitQuerySubscribeWidgetsClass
 			$this->_options['thankPopup']['img'] = 'img_10.png';
 		}
 		
-		if(!$this->_options[thankPopup]){
-			$this->_options[subscribeBar][disabled] = 1;
-			$this->_options[subscribeBar][background] = 'bg_red';
-			$this->_options[subscribeBar][button_color] = 'btn_black';
+		if(!$this->_options[subscribeExit]){
+			$this->_options[subscribeExit][disabled] = 1;
 			$this->_options[subscribeExit][background] = 'bg_red';
 			$this->_options[subscribeExit][button_color] = 'btn_black invert';
 			$this->_options[subscribeExit][typeWindow] = 'pq_medium';
