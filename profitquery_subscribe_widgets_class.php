@@ -241,9 +241,6 @@ class ProfitQuerySubscribeWidgetsClass
 			$this->_options[subscribeExit][typeWindow] = 'pq_medium';
 		}
 		
-		if(!$this->_options['adminEmail']){
-			$this->_options['adminEmail'] = get_settings('admin_email');
-		}
 		
 		$this->_options[subscribe_widgets_loaded] = 1;
 		update_option('profitquery', $this->_options);
