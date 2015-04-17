@@ -4,7 +4,7 @@ Donate link: http://profitquery.com/subscribe_witgets.html
 Tags: contact information, email, profitquery, profitquery widgets, bar, mailchimp bar, exit popup, exit visitors, subscribe, mailchimp subscribe, subscribers, widget, widgets, aio widget, tools, mailchimp, mailchimp for wordpress, mailchimp for wp, MailChimp form, mailchimp sign-up, newsletter, newsletter form, newsletter sign-up, free widgets
 Requires at least: 2.9
 Tested up to: 4.1.1
-Stable tag: 1.0.6
+Stable tag: 2.0.1
 License: GPL 2. See License below for copyright jots and tittles.
 
 Simply widgets for growth 3x website subscribers, collect customers email, folllowers in social media and all for free.
@@ -27,7 +27,7 @@ Simply free widgets for growth 3x website subscribers and folllowers in social m
 11. All options on your wordpress admin area
 12. Google Analitics integration
 
-<br><a href="http://profitquery.com/aio_wp_demo_carousel.html?p=subscribeBar&return=https://wordpress.org/plugins/mailchimp-bar-exit-popup-subscribe-witget/" target="_blank">Subscribe Bar Live Demo</a><br>
+<br><a href="http://profitquery.com/aio_wp_demo_carousel_v2.html?p=subscribeBar&return=https://wordpress.org/plugins/mailchimp-bar-exit-popup-subscribe-witget/" target="_blank">Subscribe Bar Live Demo</a><br>
 
 
 = Exit Popup =
@@ -43,7 +43,7 @@ Simply free widgets for growth 3x website subscribers and folllowers in social m
 10. Google Analitics integration
 11. All options on your wordpress admin area
 
-<br><a href="http://profitquery.com/aio_wp_demo_carousel.html?p=subscribeExit&return=https://wordpress.org/plugins/mailchimp-bar-exit-popup-subscribe-witget/" target="_blank">Exit Popup Live Demo</a><br>
+<br><a href="http://profitquery.com/aio_wp_demo_carousel_v2.html?p=subscribeExit&return=https://wordpress.org/plugins/mailchimp-bar-exit-popup-subscribe-witget/" target="_blank">Exit Popup Live Demo</a><br>
 
 
 = Following =
@@ -56,7 +56,7 @@ Simply free widgets for growth 3x website subscribers and folllowers in social m
 7. All options on your wordpress admin area
 8. You can bind open popup with any block on your website click
 
-<br><a href="http://profitquery.com/aio_wp_demo_carousel.html?p=follow&return=https://wordpress.org/plugins/mailchimp-bar-exit-popup-subscribe-witget/" target="_blank">Following Live Demo</a><br>
+<br><a href="http://profitquery.com/aio_wp_demo_carousel_v2.html?p=follow&return=https://wordpress.org/plugins/mailchimp-bar-exit-popup-subscribe-witget/" target="_blank">Following Live Demo</a><br>
 
 
 = Thank Popup =
@@ -71,7 +71,7 @@ Simply free widgets for growth 3x website subscribers and folllowers in social m
 9. All options on your wordpress admin area
 10. You can bind open popup with any block on your website click
 
-<br><a href="http://profitquery.com/aio_wp_demo_carousel.html?p=thankPopup&return=https://wordpress.org/plugins/mailchimp-bar-exit-popup-subscribe-witget/" target="_blank">Thank Popup Live Demo</a><br>
+<br><a href="http://profitquery.com/aio_wp_demo_carousel_v2.html?p=thankPopup&return=https://wordpress.org/plugins/mailchimp-bar-exit-popup-subscribe-witget/" target="_blank">Thank Popup Live Demo</a><br>
 
 
 <br>
@@ -124,6 +124,16 @@ All of the options required through this plugin require javascript. JavaScript m
 8. Many header images popup
 
 == Changelog ==
+
+= 2.0.1 =
+mobile overlay fixed
+
+= 2.0 =
+major update:
+add 2d 3d animation
+add hover effects
+refactoring icons
+sript load time
 
 = 1.0.6 =
 add hack for cache js

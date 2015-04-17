@@ -23,7 +23,7 @@
 * @package  Wordpress_Plugin
 * @author   ShemOtechnik Profitquery Team <support@profitquery.com>
 * @license  http://www.php.net/license/3_01.txt  PHP License 3.01
-* @version  SVN: 1.0.6
+* @version  SVN: 2.0.1
 */
 
 class ProfitQuerySubscribeWidgetsClass
@@ -176,8 +176,9 @@ class ProfitQuerySubscribeWidgetsClass
 		//design
 		if(isset($data[design])){
 			unset($return[design]);
-			if($data[design][form] == 'square') $data[design][form]='';
-			$return[design] = $data[design][size].$data[design][form]." ".$data[design][color]." ".$data[design][shadow];
+			if($data[design][form] == 'square' || $data[design][form] == 'pq_square') $data[design][form]='';
+			if(!strstr($data[design][form], 'pq_') && trim($data[design][form])) $data[design][form] = 'pq_'.$data[design][form];
+			$return[design] = $data[design][size]." ".$data[design][form]." ".$data[design][color]." ".$data[design][shadow];
 		}
 		
 		return $return;
@@ -220,18 +221,21 @@ class ProfitQuerySubscribeWidgetsClass
 				
 		if(!$this->_options[follow]) $this->_options[follow][disabled] = 1;
 		
-		if(!$this->_options[subscribeBar]){
-			$this->_options[subscribeBar][disabled] = 1;
-			$this->_options[subscribeBar][background] = 'bg_red';
-			$this->_options[subscribeBar][button_color] = 'btn_black';			
-		}
-		
 		if(!$this->_options[thankPopup]){
 			$this->_options[thankPopup][disabled] = 1;
 			$this->_options['thankPopup']['title'] = 'Thank You';
 			$this->_options['thankPopup']['buttonTitle'] = 'Close';
 			$this->_options['thankPopup']['background'] = 'bg_grey';
 			$this->_options['thankPopup']['img'] = 'img_10.png';
+			$this->_options[thankPopup][animation] = 'bounceInDown';
+			$this->_options[thankPopup][overlay] = 'over_white';
+		}
+		
+		if(!$this->_options[subscribeBar]){
+			$this->_options[subscribeBar][disabled] = 1;
+			$this->_options[subscribeBar][background] = 'bg_red';
+			$this->_options[subscribeBar][button_color] = 'btn_black';			
+			$this->_options[subscribeBar][animation] = 'bounce';			
 		}
 		
 		if(!$this->_options[subscribeExit]){
@@ -239,6 +243,8 @@ class ProfitQuerySubscribeWidgetsClass
 			$this->_options[subscribeExit][background] = 'bg_red';
 			$this->_options[subscribeExit][button_color] = 'btn_black invert';
 			$this->_options[subscribeExit][typeWindow] = 'pq_medium';
+			$this->_options[subscribeExit][animation] = 'tada';						
+			$this->_options[subscribeExit][overlay] = 'over_black_lt';
 		}
 		
 		
@@ -285,6 +291,8 @@ class ProfitQuerySubscribeWidgetsClass
 				if(trim($_POST[follow][title])) $this->_options['follow']['title'] = sanitize_text_field($_POST[follow][title]); else $this->_options['follow']['title'] = '';
 				if(trim($_POST[follow][sub_title])) $this->_options['follow']['sub_title'] = sanitize_text_field($_POST[follow][sub_title]); else $this->_options['follow']['sub_title'] = '';
 				if(trim($_POST[follow][background])) $this->_options['follow']['background'] = sanitize_text_field($_POST[follow][background]); else $this->_options['follow']['background'] = '';
+				if(trim($_POST[follow][animation])) $this->_options['follow']['animation'] = sanitize_text_field($_POST[follow][animation]); else $this->_options['follow']['animation'] = '';
+				if(trim($_POST[follow][overlay])) $this->_options['follow']['overlay'] = sanitize_text_field($_POST[follow][overlay]); else $this->_options['follow']['overlay'] = '';
 				if($_POST[follow][follow_socnet]){
 					if(trim($_POST[follow][follow_socnet][FB]) != '') $this->_options[follow][follow_socnet][FB] = sanitize_text_field($_POST[follow][follow_socnet][FB]); else $this->_options[follow][follow_socnet][FB] = '';
 					if(trim($_POST[follow][follow_socnet][TW]) != '') $this->_options[follow][follow_socnet][TW] = sanitize_text_field($_POST[follow][follow_socnet][TW]); else $this->_options[follow][follow_socnet][TW] = '';
@@ -303,6 +311,8 @@ class ProfitQuerySubscribeWidgetsClass
 				if(trim($_POST[thankPopup][background])) $this->_options['thankPopup']['background'] = sanitize_text_field($_POST[thankPopup][background]); else $this->_options['thankPopup']['background'] = '';
 				if(trim($_POST[thankPopup][img])) $this->_options['thankPopup']['img'] = sanitize_text_field($_POST[thankPopup][img]); else $this->_options['thankPopup']['img'] = '';
 				if(trim($_POST[thankPopup][imgUrl])) $this->_options['thankPopup']['imgUrl'] = sanitize_text_field($_POST[thankPopup][imgUrl]); else $this->_options['thankPopup']['imgUrl'] = '';				
+				if(trim($_POST[thankPopup][animation])) $this->_options['thankPopup']['animation'] = sanitize_text_field($_POST[thankPopup][animation]); else $this->_options['thankPopup']['animation'] = '';				
+				if(trim($_POST[thankPopup][overlay])) $this->_options['thankPopup']['overlay'] = sanitize_text_field($_POST[thankPopup][overlay]); else $this->_options['thankPopup']['overlay'] = '';				
 			}												
 			
 			//subscribeBar
@@ -355,6 +365,7 @@ class ProfitQuerySubscribeWidgetsClass
 				if(trim($_POST[subscribeBar][background])) $this->_options['subscribeBar']['background'] = sanitize_text_field($_POST[subscribeBar][background]); else $this->_options['subscribeBar']['background'] = '';
 				if(trim($_POST[subscribeBar][button_color])) $this->_options['subscribeBar']['button_color'] = sanitize_text_field($_POST[subscribeBar][button_color]); else $this->_options['subscribeBar']['button_color'] = '';
 				if(trim($_POST[subscribeBar][size])) $this->_options['subscribeBar']['size'] = sanitize_text_field($_POST[subscribeBar][size]); else $this->_options['subscribeBar']['size'] = '';								
+				if(trim($_POST[subscribeBar][animation])) $this->_options['subscribeBar']['animation'] = sanitize_text_field($_POST[subscribeBar][animation]); else $this->_options['subscribeBar']['animation'] = '';
 				
 				if($_POST[subscribeBar][afterProceed]){
 					if($_POST[subscribeBar][afterProceed][follow] == 'on'){
@@ -386,6 +397,8 @@ class ProfitQuerySubscribeWidgetsClass
 				if(trim($_POST[subscribeExit][button_color])) $this->_options['subscribeExit']['button_color'] = sanitize_text_field($_POST[subscribeExit][button_color]); else $this->_options['subscribeExit']['button_color'] = '';
 				if(trim($_POST[subscribeExit][img])) $this->_options['subscribeExit']['img'] = sanitize_text_field($_POST[subscribeExit][img]); else $this->_options['subscribeExit']['img'] = '';
 				if(trim($_POST[subscribeExit][imgUrl])) $this->_options['subscribeExit']['imgUrl'] = sanitize_text_field($_POST[subscribeExit][imgUrl]); else $this->_options['subscribeExit']['imgUrl'] = '';				
+				if(trim($_POST[subscribeExit][animation])) $this->_options['subscribeExit']['animation'] = sanitize_text_field($_POST[subscribeExit][animation]); else $this->_options['subscribeExit']['animation'] = '';				
+				if(trim($_POST[subscribeExit][overlay])) $this->_options['subscribeExit']['overlay'] = sanitize_text_field($_POST[subscribeExit][overlay]); else $this->_options['subscribeExit']['overlay'] = '';				
 				if($_POST[subscribeExit][afterProceed]){
 					if($_POST[subscribeExit][afterProceed][follow] == 'on'){
 						$this->_options['subscribeExit']['afterProceed']['follow'] = 1;
@@ -675,7 +688,17 @@ class ProfitQuerySubscribeWidgetsClass
 								<option value="" <?php if($this->_options[subscribeBar][size] == '') echo 'selected';?>>Size M</option>
 								<option value="pq_small" <?php if($this->_options[subscribeBar][size] == 'pq_small') echo 'selected';?>>Size S</option>
 							</select>
+							</label>							
+							<div class="clear"></div>							
+							<label style="width: 49%; display: inline-block; margin: 5px 0 15px;">
+									<input type="radio" id="subscribeBar_animation_bounce" name="subscribeBar[animation]" onclick="subscribeBarPreview();" value="bounce" <?php if($this->_options[subscribeBar][animation] == 'bounce') echo 'checked';?> style="display: inline-block; float: left; margin: 3px 10px 3px 0;">
+									<p>Bounce animation</p>
 							</label>
+							<label style="width: 49%; display: inline-block; margin: 5px 0 15px;">
+									<input type="radio" id="subscribeBar_animation_fade" name="subscribeBar[animation]" onclick="subscribeBarPreview();" value="fade" <?php if($this->_options[subscribeBar][animation] == 'fade' || $this->_options[subscribeBar][animation] == '') echo 'checked';?> style="display: inline-block; float: left; margin: 3px 10px 3px 0;">
+									<p>Fading animation</p>
+							</label>
+							<div class="clear"></div>
 							<label>
 							<div class="pq_box">
 								<p>Follow Popup After Success</p><div class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-on bootstrap-switch-id-switch-size bootstrap-switch-animate bootstrap-switch-mini bootstrap-switch-success">
@@ -692,16 +715,21 @@ class ProfitQuerySubscribeWidgetsClass
 							<div class="clear"></div>
 							<p style="font-family: pt sans narrow; font-size: 19px; margin: 20px 0 10px;">Only Design Live Demo</p>
 							<img src="<?php echo plugins_url('images/browser.png', __FILE__);?>" style="width: 100%; margin-bottom: -6px;" />
-							<div style="transform-origin: 0 0; transform: scale(0.8); width: 125%; height: 300px; box-sizing: border-box; border: 1px solid lightgrey;">
-							<iframe scrolling="no" id="subscribeBarLiveViewIframe" width="100%" height="300px" src="" style="background: white; margin: 0;"></iframe>
+							<div style="transform-origin: 0 0; transform: scale(0.55); width: 1024px; height: 400px; box-sizing: border-box; border: 1px solid lightgrey; margin-bottom: -150px;">
+							<iframe scrolling="no" id="subscribeBarLiveViewIframe" width="100%" height="400px" src="" style="background: white; margin: 0;"></iframe>
 							</div>
 							
 							<script>								
-								function subscribeBarPreview(){									
-									var design = document.getElementById('subscribeBar_size').value+' '+document.getElementById('subscribeBar_position').value+' '+document.getElementById('subscribeBar_background').value+' '+document.getElementById('subscribeBar_button_color').value;
-									var previewUrl = 'http://profitquery.com/aio_widgets_iframe_demo.html?utm-campaign=wp_aio_widgets&p=subscribeBar&design='+design;									
-									document.getElementById('subscribeBarLiveViewIframe').src = previewUrl;									
-									
+								function subscribeBarPreview(){	
+									if(document.getElementById('subscribeBar_animation_bounce').checked) {
+										var animation = 'pq_animated bounce';
+									} else {
+										var animation = '';
+									}									
+									var design = document.getElementById('subscribeBar_size').value+' '+document.getElementById('subscribeBar_position').value+' '+document.getElementById('subscribeBar_background').value+' '+document.getElementById('subscribeBar_button_color').value+' '+animation;
+									var previewUrl = 'http://profitquery.com/aio_widgets_iframe_demo_v2.html?utm-campaign=wp_aio_widgets&p=subscribeBar&design='+design;									
+									document.getElementById('subscribeBarLiveViewIframe').src = previewUrl;
+									console.log(previewUrl);
 								}
 								subscribeBarPreview();
 							</script>
@@ -758,6 +786,57 @@ class ProfitQuerySubscribeWidgetsClass
 							</select></label>
 							</div>
 							<div class="clear"></div>
+							<label style="width: 49%; display: inline-block; margin: 0px 0 10px;">
+									<input type="radio" id="subscribeExit_animation_bounce" onclick="subscribeExitPreview()" name="subscribeExit[animation]" value="tada" <?php if($this->_options[subscribeExit][animation] == 'tada') echo 'checked';?> style="display: inline-block; float: left; margin: 3px 10px 3px 0;">
+									<p>Animation</p>
+							</label>
+							<label style="width: 49%; display: inline-block; margin: 0px 0 10px;">
+									<input type="radio" id="subscribeExit_animation_fade" onclick="subscribeExitPreview()" name="subscribeExit[animation]" value="fade" <?php if($this->_options[subscribeExit][animation] == 'fade' || $this->_options[subscribeExit][animation] == '') echo 'checked';?> style="display: inline-block; float: left; margin: 3px 10px 3px 0;">
+									<p>Fading animation</p>
+							</label>
+							<hr>
+							<div class="pq-sm-12 icons" style="padding-left: 0; margin: 27px 0 0;">
+							<label><select id="subscribeExit_overlay" onchange="subscribeExitPreview();" name="subscribeExit[overlay]">
+								    <option value="over_grey" <?php if($this->_options[subscribeExit][overlay] == 'over_grey') echo 'selected';?>>Color overlay - Grey</option>
+									<option value="over_white" <?php if($this->_options[subscribeExit][overlay] == 'over_white' || $this->_options[subscribeExit][overlay] == '') echo 'selected';?>>Color overlay - White</option>
+									<option value="over_yellow" <?php if($this->_options[subscribeExit][overlay] == 'over_yellow') echo 'selected';?>>Color overlay - Yellow</option>
+									<option value="over_wormwood" <?php if($this->_options[subscribeExit][overlay] == 'over_wormwood') echo 'selected';?>>Color overlay - Wormwood</option>
+									<option value="over_blue" <?php if($this->_options[subscribeExit][overlay] == 'over_blue') echo 'selected';?>>Color overlay - Blue</option>
+									<option value="over_green" <?php if($this->_options[subscribeExit][overlay] == 'over_green') echo 'selected';?>>Color overlay - Green</option>
+									<option value="over_beige" <?php if($this->_options[subscribeExit][overlay] == 'over_beige') echo 'selected';?>>Color overlay - Beige</option>
+									<option value="over_red" <?php if($this->_options[subscribeExit][overlay] == 'over_red') echo 'selected';?>>Color overlay - Red</option>
+									<option value="over_iceblue" <?php if($this->_options[subscribeExit][overlay] == 'over_iceblue') echo 'selected';?>>Color overlay - Iceblue</option>
+									<option value="over_black" <?php if($this->_options[subscribeExit][overlay] == 'over_black') echo 'selected';?>>Color overlay - Black</option>
+									<option value="over_skyblue" <?php if($this->_options[subscribeExit][overlay] == 'over_skyblue') echo 'selected';?>>Color overlay - Skyblue</option>
+									<option value="over_lilac" <?php if($this->_options[subscribeExit][overlay] == 'over_lilac') echo 'selected';?>>Color overlay - Lilac</option>
+									<option value="over_grey_lt" <?php if($this->_options[subscribeExit][overlay] == 'over_grey_lt') echo 'selected';?>>Color overlay - Grey - Light</option>
+									<option value="over_white_lt" <?php if($this->_options[subscribeExit][overlay] == 'over_white_lt') echo 'selected';?>>Color overlay - White - Light</option>
+									<option value="over_yellow_lt" <?php if($this->_options[subscribeExit][overlay] == 'over_yellow_lt') echo 'selected';?>>Color overlay - Yellow - Light</option>
+									<option value="over_wormwood_lt" <?php if($this->_options[subscribeExit][overlay] == 'over_wormwood_lt') echo 'selected';?>>Color overlay - Wormwood - Light</option>
+									<option value="over_blue_lt" <?php if($this->_options[subscribeExit][overlay] == 'over_blue_lt') echo 'selected';?>>Color overlay - Blue - Light</option>
+									<option value="over_green_lt" <?php if($this->_options[subscribeExit][overlay] == 'over_green_lt') echo 'selected';?>>Color overlay - Green - Light</option>
+									<option value="over_beige_lt" <?php if($this->_options[subscribeExit][overlay] == 'over_beige_lt') echo 'selected';?>>Color overlay - Beige - Light</option>
+									<option value="over_red_lt" <?php if($this->_options[subscribeExit][overlay] == 'over_red_lt') echo 'selected';?>>Color overlay - Red - Light</option>
+									<option value="over_iceblue_lt" <?php if($this->_options[subscribeExit][overlay] == 'over_iceblue_lt') echo 'selected';?>>Color overlay - Iceblue - Light</option>
+									<option value="over_black_lt" <?php if($this->_options[subscribeExit][overlay] == 'over_black_lt') echo 'selected';?>>Color overlay - Black - Light</option>
+									<option value="over_skyblue_lt" <?php if($this->_options[subscribeExit][overlay] == 'over_skyblue_lt') echo 'selected';?>>Color overlay - Skyblue - Light</option>
+									<option value="over_lilac_lt" <?php if($this->_options[subscribeExit][overlay] == 'over_lilac_lt') echo 'selected';?>>Color overlay - Lilac - Light</option>
+									<option value="over_grey_solid" <?php if($this->_options[subscribeExit][overlay] == 'over_grey_solid') echo 'selected';?>>Color overlay - Grey - Solid</option>
+									<option value="over_white_solid" <?php if($this->_options[subscribeExit][overlay] == 'over_white_solid') echo 'selected';?>>Color overlay - White - Solid</option>
+									<option value="over_yellow_solid" <?php if($this->_options[subscribeExit][overlay] == 'over_yellow_solid') echo 'selected';?>>Color overlay - Yellow - Solid</option>
+									<option value="over_wormwood_solid" <?php if($this->_options[subscribeExit][overlay] == 'over_wormwood_solid') echo 'selected';?>>Color overlay - Wormwood - Solid</option>
+									<option value="over_blue_solid" <?php if($this->_options[subscribeExit][overlay] == 'over_blue_solid') echo 'selected';?>>Color overlay - Blue - Solid</option>
+									<option value="over_green_solid" <?php if($this->_options[subscribeExit][overlay] == 'over_green_solid') echo 'selected';?>>Color overlay - Green - Solid</option>
+									<option value="over_beige_solid" <?php if($this->_options[subscribeExit][overlay] == 'over_beige_solid') echo 'selected';?>>Color overlay - Beige - Solid</option>
+									<option value="over_red_solid" <?php if($this->_options[subscribeExit][overlay] == 'over_red_solid') echo 'selected';?>>Color overlay - Red - Solid</option>
+									<option value="over_iceblue_solid" <?php if($this->_options[subscribeExit][overlay] == 'over_iceblue_solid') echo 'selected';?>>Color overlay - Iceblue - Solid</option>
+									<option value="over_black_solid" <?php if($this->_options[subscribeExit][overlay] == 'over_black_solid') echo 'selected';?>>Color overlay - Black - Solid</option>
+									<option value="over_skyblue_solid" <?php if($this->_options[subscribeExit][overlay] == 'over_skyblue_solid') echo 'selected';?>>Color overlay - Skyblue - Solid</option>
+									<option value="over_lilac_solid" <?php if($this->_options[subscribeExit][overlay] == 'over_lilac_solid') echo 'selected';?>>Color overlay - Lilac - Solid</option>
+							</select></label>
+							</div>
+							
+							<div class="clear"></div>
 							<label>
 							<select id="subscribeExit_img"  name="subscribeExit[img]" onchange="chagnePopupImg(this.value, 'subscribeExitFotoBlock', 'subscribeExitCustomFotoBlock');subscribeExitPreview();">
 								<option value="" selected >No picture</option>
@@ -800,11 +879,17 @@ class ProfitQuerySubscribeWidgetsClass
 							</div>
 							<script>
 								function subscribeExitPreview(){									
-									var design = document.getElementById('subscribeExit_typeWindow').value+' pq_top '+document.getElementById('subscribeExit_background').value+' '+document.getElementById('subscribeExit_button_color').value;
+									
 									var img = document.getElementById('subscribeExit_img').value;
 									var imgUrl = document.getElementById('subscribeExitCustomFotoBlock').value;	
-									
-									var previewUrl = 'http://profitquery.com/aio_widgets_iframe_demo.html?utm-campaign=wp_aio_widgets&p=subscribeExit&design='+design+'&img='+encodeURIComponent(img)+'&imgUrl='+encodeURIComponent(imgUrl);
+									if(document.getElementById('subscribeExit_animation_bounce').checked) {
+										var animation = 'pq_animated bounceInDown';
+									} else {
+										var animation = '';
+									}
+									var design = document.getElementById('subscribeExit_typeWindow').value+' pq_top '+document.getElementById('subscribeExit_background').value+' '+document.getElementById('subscribeExit_button_color').value+' '+animation;
+									var overlay = document.getElementById('subscribeExit_overlay').value;									
+									var previewUrl = 'http://profitquery.com/aio_widgets_iframe_demo_v2.html?utm-campaign=wp_aio_widgets&p=subscribeExit&design='+design+'&overlay='+encodeURIComponent(overlay)+'&img='+encodeURIComponent(img)+'&imgUrl='+encodeURIComponent(imgUrl);									
 									document.getElementById('subscribeExitLiveViewIframe').src = previewUrl;									
 									
 								}
@@ -1174,6 +1259,11 @@ class ProfitQuerySubscribeWidgetsClass
 			<h5 style="color: white; background: #008AFF; width: 100px; margin: 0 auto; line-height: 35px; font-size: 26px;">PRO</h5>
 			<h5>Get Profitquery Pro version</h5>
 			<a href="http://profitquery.com/promo.html" target="_blank"><input type="button" class="btn_m_red" style="width: initial; margin: 20px auto 8px;" value="Learn more"></a>
+		</div>
+		<div class="pq-sm-10" style="overflow: hidden; padding: 20px; margin: 30px 0 25px; background: white;">				
+			<h5>Write your article. Promote your blog.</h5>
+			<p>Write your article. Promote your blog.You can write any article about Profitquery for your customers, friends and <a href="http://profitquery.com/blog.html#send" target="_blank">send </a> for us your link or content. We paste your work on our <a href="http://profitquery.com/blog.html" target="_blank">blog</a>. Use your native language.</p>
+		<a href="http://profitquery.com/blog.html#send" target="_blank"><input type="button" class="btn_m_white" value="Send your article"></a>
 		</div>
 	</div>
 </div>
