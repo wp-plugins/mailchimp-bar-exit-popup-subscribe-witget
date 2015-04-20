@@ -21,8 +21,8 @@
 /**
 * Plugin Name: Mailchimp Bar + Exit Popup | Subscribe Widget
 * Plugin URI: http://profitquery.com/subscribe_witgets.html
-* Description: Simply widgets for growth 3x website subscribers, collect customers email, folllowers in social media and all for free.
-* Version: 2.0.2
+* Description: Smarter mailchimp subscribe tools for collect customers email, e-mail list builder and growth followers. Bar and exit intent subscribe popup.
+* Version: 2.0.3
 *
 * Author: Profitquery Team <support@profitquery.com>
 * Author URI: http://profitquery.com/?utm_campaign=subscribe_widgets_wp
@@ -70,8 +70,8 @@ function profitquery_subscribe_widgets_init(){
 	global $profitquery;	
 	if ( !is_admin() && $profitquery[apiKey] && !$profitquery['errorApiKey'] && !$profitquery['aio_widgets_loaded']){
 		add_action('wp_head', 'profitquery_subscribe_widgets_hack_for_cach_code');
-		wp_register_script('lite_profitquery_lib', plugins_url().'/'.PROFITQUERY_SUBSCRIBE_WIDGETS_PLUGIN_NAME.'/js/lite.profitquery.min.js?apiKey='.$profitquery[apiKey]);		
-		wp_enqueue_script('lite_profitquery_lib');		
+		//wp_register_script('lite_profitquery_lib', plugins_url().'/'.PROFITQUERY_SUBSCRIBE_WIDGETS_PLUGIN_NAME.'/js/lite.profitquery.min.js?apiKey='.$profitquery[apiKey]);		
+		//wp_enqueue_script('lite_profitquery_lib');		
 		add_action('wp_footer', 'profitquery_subscribe_widgets_insert_code');
 	}
 }
@@ -229,11 +229,36 @@ function profitquery_subscribe_widgets_insert_code(){
 
 	
 	print "
-	<script>
-	profitquery.loadFunc.callAfterPQInit(function(){
-		var smartWidgetsBoxObject = ".json_encode($profitquerySmartWidgetsStructure).";	
-		profitquery.widgets.smartWidgetsBox(smartWidgetsBoxObject);	
-	});
+	<script>	
+		(function () {
+			var s = document.createElement('script');
+			var _isPQLibraryLoaded = false;
+			s.type = 'text/javascript';
+			s.async = true;
+			s.src = '".plugins_url()."/".PROFITQUERY_SUBSCRIBE_WIDGETS_PLUGIN_NAME."/js/lite.profitquery.min.js?apiKey=".$profitquery[apiKey]."';
+			s.onload = function(){
+				if ( !_isPQLibraryLoaded )
+				{					
+				  _isPQLibraryLoaded = true;				  
+				  profitquery.loadFunc.callAfterPQInit(function(){
+						var smartWidgetsBoxObject = ".json_encode($profitquerySmartWidgetsStructure).";	
+						profitquery.widgets.smartWidgetsBox(smartWidgetsBoxObject);	
+					});
+				}
+			}
+			s.onreadystatechange = function() {								
+				if ( !_isPQLibraryLoaded && (this.readyState == 'complete' || this.readyState == 'loaded') )
+				{					
+				  _isPQLibraryLoaded = true;
+					profitquery.loadFunc.callAfterPQInit(function(){
+						var smartWidgetsBoxObject = ".json_encode($profitquerySmartWidgetsStructure).";	
+						profitquery.widgets.smartWidgetsBox(smartWidgetsBoxObject);	
+					});
+				}
+			};
+			var x = document.getElementsByTagName('script')[0];						
+			x.parentNode.insertBefore(s, x);			
+		})();				
 	</script>
 	";
 }
