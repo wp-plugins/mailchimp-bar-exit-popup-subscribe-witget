@@ -152,6 +152,9 @@ All of the options required through this plugin require javascript. JavaScript m
 
 == Changelog ==
 
+= 2.0.3 =
+* async load add
+
 = 2.0.2 =
 * js update
 
