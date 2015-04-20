@@ -115,7 +115,6 @@ To upload the plugin through WordPress, instead of FTP:
 Profitquery is fast-growing intelligence system for boost any website. For now we have over 20 smart tools some of them are unique. And this is just the beginning.
 Our team make the complex simple. Make pro version similar tools - free. And it's all thanks unprecedented use of the Latest Technology. Vector graphics, 2D & 3D animation, more than you can imagine for your website for free right now.
 
-
 = I want to write article about Profitquery Marketing Intelligence platform =
 Thats wonderfull! You can write about profitquery and send us content link. We paste your work on <a href="http://profitquery.com/blog.html">Profitquery Blog</a>
 
@@ -202,5 +201,14 @@ All of the options required through this plugin require javascript. JavaScript m
 == Tools Not displaying But I have any cache plugin  ==
 If you have any cache plugin like wp cache, you need to find on them exception JS and save that lite.profitquery.min.js do not need to minimized.
 Profitquery library already minimized and load from your website.
+
+= Contact form / Call me displayed, but not working =
+In free version we use default mailto function. You can set up it. For example, <a href="https://sites.google.com/a/umich.edu/going-google/helpdesk-reps/set-google-chrome-to-be-the-default-mail-handler">Set Google Chrome to be the Default Mail Handler</a>
+In pro version all email send by profitquery service. Get pro, email us <a href="mailto:info@profitquery.com">info@profitquery.com</a>
+
+== Image sharer skip tag  ==
+You can skip any photo you want. For example header logo, or any banner.
+For do that you need to edit image tag and set up new option on there
+`<img src="<any photo>" data-pq-skip-photo="1"...>` skip tag
 
 PHP 5+ is preferred; PHP 4 is supported.
