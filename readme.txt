@@ -1,7 +1,7 @@
 === Mailchimp Bar + Exit Popup | Subscribe Widget ===
 Contributors: schemotechnik, ilya_v, frenly_girl
 Donate link: http://profitquery.com/subscribe_witgets.html
-Tags: contact information, email, profitquery, profitquery widgets, bar, mailchimp bar, exit popup, exit visitors, subscribe, mailchimp subscribe, subscribers, widget, widgets, aio widget, tools, mailchimp, mailchimp for wordpress, mailchimp for wp, MailChimp form, mailchimp sign-up, newsletter, newsletter form, newsletter sign-up, free widgets
+Tags: contact information, email, profitquery, profitquery widgets, bar, mailchimp bar, exit popup, exit visitors, subscribe, mailchimp subscribe, subscribers, widget, widgets, tools, mailchimp, mailchimp for wordpress, mailchimp for wp, MailChimp form, mailchimp sign-up, newsletter, newsletter form, newsletter sign-up, free widgets, more subscribers, more subscription, growth tools, mailchimp tools, welcome bar, hello bar, exit monitor, exit intent
 Requires at least: 2.9
 Tested up to: 4.1.1
 Stable tag: 2.0.3
