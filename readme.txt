@@ -119,7 +119,7 @@ Our team make the complex simple. Make pro version similar tools - free. And it'
 Thats wonderfull! You can write about profitquery and send us content link. We paste your work on <a href="http://profitquery.com/blog.html">Profitquery Blog</a>
 
 = I want to translate default profitquery text to the another language =
-Thats Great! Email us on the <a href="mailto:info@profitquery.com">info@profitquery.com</a> And we write about your work on the plugin notes.
+Thats Great! Email us <a href="mailto:info@profitquery.com">info@profitquery.com</a> And we write about your work on the plugin notes.
 
 = I think in pro version must be that features... =
 Please, email us <a href="mailto:info@profitquery.com">info@profitquery.com</a> we like our customer feedback's
