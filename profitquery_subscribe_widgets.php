@@ -22,7 +22,7 @@
 * Plugin Name: Mailchimp Bar + Exit Popup | Subscribe Widget
 * Plugin URI: http://profitquery.com/subscribe_witgets.html
 * Description: Smarter mailchimp subscribe tools for collect customers email, e-mail list builder and growth followers. Bar and exit intent subscribe popup.
-* Version: 2.0.3
+* Version: 2.0.4
 *
 * Author: Profitquery Team <support@profitquery.com>
 * Author URI: http://profitquery.com/?utm_campaign=subscribe_widgets_wp
