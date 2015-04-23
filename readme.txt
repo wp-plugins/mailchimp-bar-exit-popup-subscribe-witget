@@ -125,7 +125,7 @@ Thats Great! Email us <a href="mailto:info@profitquery.com">info@profitquery.com
 Please, email us <a href="mailto:info@profitquery.com">info@profitquery.com</a> we like our customer feedback's
 
 == I update for new version and something going wrong  ==
-Don't worry. Firsy of all try clear you browser cache and reopen page or admin area. If problem stil be there email us <a href="mailto:support@profitquery.com">support@profitquery.com</a> with problem description, browser & operation system version, maybe some screenshot.
+Don't worry. First of all try clear you browser cache and reopen page or admin area. If problem still be there email us <a href="mailto:support@profitquery.com">support@profitquery.com</a> with problem description, browser & operation system version, maybe some screenshot.
 
 = I have a problem and i don't know how fixed that =
 You can write about problem on the plugin forum or email us <a href="mailto:support@profitquery.com">support@profitquery.com</a>
