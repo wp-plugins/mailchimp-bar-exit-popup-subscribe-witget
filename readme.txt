@@ -124,19 +124,19 @@ Thats Great! Email us <a href="mailto:info@profitquery.com">info@profitquery.com
 = I think in pro version must be that features... =
 Please, email us <a href="mailto:info@profitquery.com">info@profitquery.com</a> we like our customer feedback's
 
+== I update for new version and something going wrong  ==
+Don't worry. Firsy of all try clear you browser cache and reopen page or admin area. If problem stil be there email us <a href="mailto:support@profitquery.com">support@profitquery.com</a> with problem description, browser & operation system version, maybe some screenshot.
+
 = I have a problem and i don't know how fixed that =
-You can write about problem on the plugin forum or email us support@profitquery.com
+You can write about problem on the plugin forum or email us <a href="mailto:support@profitquery.com">support@profitquery.com</a>
 
 = Is plugin by Profitquery free? =
-
 Yes, it's free.
 
 = Do I need to create an account? =
-
 No. All needfull information profitquery get automatically. That's why Profitquery can generate secure apiKey without any sign-up.
 
 = Is JavaScript required? =
-
 All of the options required through this plugin require javascript. JavaScript must be enabled. We load the actual interface via JavaScript at run-time, which allows us to upgrade the functionality of the all tools itself automatically everywhere.
 
 == Screenshots ==
