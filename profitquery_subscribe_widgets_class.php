@@ -710,7 +710,7 @@ class ProfitQuerySubscribeWidgetsClass
 					<form action="<?php echo $this->getSettingsPageUrl();?>#EmailBlock" method="post">
 					<input type="hidden" name="action" value="edit">
 					  <div class="pq-panel-body">
-					  <p>Get more subscribers, simply mailchimp integration.</p>						
+					  <p>Get more subscribers, simply mailchimp & aweber integration.</p>						
 						
 						<div class="pq-sm-6">
 							<img id="subscribeBar_IMG" src="<?php echo plugins_url('images/bar.png', __FILE__);?>" />
