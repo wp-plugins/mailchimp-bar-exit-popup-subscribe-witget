@@ -1,13 +1,13 @@
-=== Mailchimp Bar + Exit Popup | Subscribe Widget ===
+=== Aweber Mailchimp Bar + Exit Popup | Subscribe Widget ===
 Contributors: schemotechnik, ilya_v, frenly_girl
 Donate link: http://profitquery.com/subscribe_witgets.html
-Tags: contact information, email, profitquery, profitquery widgets, bar, mailchimp bar, exit popup, exit visitors, subscribe, mailchimp subscribe, subscribers, widget, widgets, tools, mailchimp, mailchimp for wordpress, mailchimp for wp, MailChimp form, mailchimp sign-up, newsletter, newsletter form, newsletter sign-up, free widgets, more subscribers, more subscription, growth tools, mailchimp tools, welcome bar, hello bar, exit monitor, exit intent
+Tags: contact information, email, profitquery, profitquery widgets, bar, mailchimp bar, aweber, aweber subscribe, aweber subscription, exit popup, exit visitors, subscribe, mailchimp subscribe, subscribers, widget, widgets, tools, mailchimp, mailchimp for wordpress, mailchimp for wp, MailChimp form, mailchimp sign-up, newsletter, newsletter form, newsletter sign-up, free widgets, more subscribers, more subscription, growth tools, mailchimp tools, welcome bar, hello bar, exit monitor, exit intent
 Requires at least: 2.9
 Tested up to: 4.2
-Stable tag: 2.0.5
+Stable tag: 2.1.0
 License: GPL 2. See License below for copyright jots and tittles.
 
-Smarter mailchimp subscribe tools for collect customers email, e-mail list builder and growth followers. Bar and exit intent popup.
+Smarter aweber & mailchimp subscribe tools for collect customers email, e-mail list builder and growth followers. Bar and exit intent popup.
 
 
 == Description ==
@@ -26,6 +26,7 @@ We prepare for you amazing subscribe bar, which always on the top, and exit inte
 
 = Features =
 * All product for free right now
+* Mailchimp, Aweber integration
 * Mobile adaptation
 * Asynchronous loading. Load Optimized
 * All features setup on your admin area
@@ -51,7 +52,7 @@ We prepare for you amazing subscribe bar, which always on the top, and exit inte
 Your email list it's most important on your blog, because it's way to contact with your reading audience. All you doing it's all for your followers. When you want to promote your blog all time you need contact information your customers to send him laterst news or link with amazing post on your blog. Thats why subscribe bar is most popular tools for wordpress blog.
 And we can get you a few way ask customers email. It is marketing bar, always on the top, with amazing animation effect, custom color, mobile adaptation and lock mechanism, and exit popup, which work when your customers move mouse to close page, or click on the close icon in the mobile version.
 Subscribe bar and exit popup integrate each other, that mean that if your customers proceed one of them second tools will be close and locked too. On the admin area you can customization many text, design, animation option. Thats way you can usage in the different language.
-All Latest Technology for your website, to make collect contact information easily. By the way, you can set up follow Us popup or just thank popup after procced action.
+All Latest Technology for your website, to make collect contact information easily. Support Mailchimp and Aweber integration, also you can ask us integrate with any service you want. By the way, you can set up follow Us popup or just thank popup after procced action.
 
 
 <br><a href="http://profitquery.com/aio_wp_demo_carousel_v2.html?p=subscribeBar&return=https://wordpress.org/plugins/mailchimp-bar-exit-popup-subscribe-witget/" target="_blank">Subscribe Bar Live Demo</a><br>
@@ -59,7 +60,7 @@ All Latest Technology for your website, to make collect contact information easi
 
 = Exit Popup =
 It is subscription floating popup, last chance to ask email outgoing customers. Thats way we develope them with fun animation (you can turned it off on your admin area) Color, size, 3D animation, color overlay and more another options all for you and your customers.
-Perhaps the most attractive is that Exit popup have free distribution too. After proceed exit popup you can set up to show popup with follow us buttons or thank popup.
+Perhaps the most attractive is that Exit popup have free distribution too. After proceed exit popup you can set up to show popup with follow us buttons or thank popup. Support Mailchimp and Aweber integration, also you can ask us integrate with any service you want.
 
 <br><a href="http://profitquery.com/aio_wp_demo_carousel_v2.html?p=subscribeExit&return=https://wordpress.org/plugins/mailchimp-bar-exit-popup-subscribe-witget/" target="_blank">Exit Popup Live Demo</a><br>
 
@@ -151,6 +152,10 @@ All of the options required through this plugin require javascript. JavaScript m
 
 == Changelog ==
 
+= 2.1 =
+* add Aweber integration
+* add disable GA tracker button
+
 = 2.0.5 =
 * add https support
 
@@ -193,15 +198,10 @@ All of the options required through this plugin require javascript. JavaScript m
 
 == PHP Version ==
 
-== Marketing Bar not displaying  ==
-* For run marketing bar you need turned on on the admin area.
-* You need <a href="https://login.mailchimp.com/">sign in</a> or create MailChimp account.
-* Create list your subscribers
-* Click the drop down and choose 'Signup forms'
-* Click the 'Embedded' forms option
-* Find Form Action="..." value. For example: `//profitquery.us10.list-manage.com/subscribe/post?u=758cdd9af98e2f075f68179e2&amp;id=eff27d7489`
-* Set it on the Form Action= option and Save changes
-* Clear browser cache and enjoy
+== Marketing Bar Integration ==
+* <a href="http://profitquery.com/mailchimp.html">Mailchimp integration</a>
+* <a href="http://profitquery.com/aweber.html">Aweber integration</a>
+* You need a new provider integration ? Email us <a href="mailto:support@profitquery.com">support@profitquery.com</a>
 
 
 == Tools Not displaying But I have any cache plugin  ==

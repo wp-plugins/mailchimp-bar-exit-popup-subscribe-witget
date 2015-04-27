@@ -23,7 +23,7 @@
 * @package  Wordpress_Plugin
 * @author   ShemOtechnik Profitquery Team <support@profitquery.com>
 * @license  http://www.php.net/license/3_01.txt  PHP License 3.01
-* @version  SVN: 2.0.5
+* @version  SVN: 2.1.0
 */
 
 class ProfitQuerySubscribeWidgetsClass
@@ -55,6 +55,14 @@ class ProfitQuerySubscribeWidgetsClass
         );
     }
 	
+	function isPluginPage(){
+		$ret = false;
+		if(strstr($_SERVER[REQUEST_URI], 'wp-admin/plugins.php')){
+			$ret = true;
+		}		
+		return $ret;
+	}
+	
 	/**
      * Functions to execute on plugin activation
      * 
@@ -64,6 +72,10 @@ class ProfitQuerySubscribeWidgetsClass
     {
         if (get_option('profitquery')) {
 			$this->_options[subscribe_widgets_loaded] = 1;
+			
+			$this->_options[subscribePluginRateUs] = array();
+			$this->_options[subscribePluginRateUs][timeActivation] = time();
+			
 			update_option('profitquery', $this->_options);
         }
     }
@@ -80,6 +92,81 @@ class ProfitQuerySubscribeWidgetsClass
 			update_option('profitquery', $this->_options);
         }
     }
+	
+	
+	/*
+	 *	parseSubscribeProviderForm
+	 *	
+	 *	@return array
+	 */
+	function parseSubscribeProviderForm()
+	{		
+		if($_POST[subscribeProvider] == 'mailchimp'){
+			$return = $this->_parseMailchimpForm();
+		}
+		if($_POST[subscribeProvider] == 'aweber'){
+			$return = $this->_parseAweberForm();
+		}
+		return $return;
+	}
+	
+	
+	function _parseMailchimpForm()
+	{
+		$txt = trim($_POST[subscribeProviderFormContent]);		
+		$array = array();
+		$matches = array();
+		if($txt){
+			$txt = stripslashes($txt);
+			$txt = str_replace("\t", ' ', $txt);
+			$txt = str_replace("\r", '', $txt);
+			$txt = str_replace("\n", '', $txt);
+			$txt = str_replace("  ", " ", $txt);
+			$txt = str_replace("  ", " ", $txt);			
+			preg_match_all('/(\<)(.*)(form)(.*)(action=)(.*)([\"\'])(.*)([\"\'])(.*)(\>)/Ui', $txt, $matches);
+			$array[formAction] = trim($matches[8][0]);
+			if(!strstr($array[formAction], 'list-manage.com')){
+				$array[formAction] = '';
+				$array[is_error] = 1;
+			}			
+		}
+		return $array;
+	}
+	
+	function _parseAweberForm()
+	{
+		$txt = trim($_POST[subscribeProviderFormContent]);		
+		$array = array();
+		$matches = array();
+		$hiddenField = array();
+		if($txt){
+			$txt = stripslashes($txt);
+			$txt = str_replace("\t", ' ', $txt);
+			$txt = str_replace("\r", '', $txt);
+			$txt = str_replace("\n", '', $txt);
+			$txt = str_replace("  ", " ", $txt);
+			$txt = str_replace("  ", " ", $txt);			
+			preg_match_all('/(\<)(.*)(form)(.*)(action=)(.*)([\"\'])(.*)([\"\'])(.*)(\>)/Ui', $txt, $matches);
+			$array[formAction] = trim($matches[8][0]);
+			if(!strstr($array[formAction], 'aweber.com')){
+				$array[formAction] = '';
+				$array[is_error] = 1;
+			} else {
+				preg_match_all('/(\<)(.*)(input)(.*)(hidden)(.*)(name=)(.*)([\"\'])(.*)([\"\'])(.*)(value=)(.*)([\"\'])(.*)([\"\'])(.*)(\>)/Ui', $txt, $matches);
+				foreach((array)$matches[10] as $k => $v){
+					$hiddenField[$v] = $matches[16][$k];
+				}
+				if($hiddenField[meta_web_form_id]){
+					$array[hidden] = $hiddenField;
+				} else {
+					$array[formAction] = '';
+					$array[is_error] = 1;
+				}
+			}
+		}
+		return $array;
+	}
+	
 	function printr($array)
 	{
 		echo '<pre>';
@@ -278,12 +365,70 @@ class ProfitQuerySubscribeWidgetsClass
         }
 		echo "
 			<link rel='stylesheet'  href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700&amp;subset=latin,cyrillic' type='text/css' media='all' />
-			<link rel='stylesheet'  href='".plugins_url()."/".PROFITQUERY_SUBSCRIBE_WIDGETS_PLUGIN_NAME."/".PROFITQUERY_SUBSCRIBE_WIDGETS_ADMIN_CSS_PATH."profitquery_smart_widgets_wordpress.css' type='text/css' media='all' />
+			<link rel='stylesheet'  href='".plugins_url()."/".PROFITQUERY_SUBSCRIBE_WIDGETS_PLUGIN_NAME."/".PROFITQUERY_SUBSCRIBE_WIDGETS_ADMIN_CSS_PATH."profitquery_smart_widgets_wordpress_v2.css' type='text/css' media='all' />
 			<link rel='stylesheet'  href='".plugins_url()."/".PROFITQUERY_SUBSCRIBE_WIDGETS_PLUGIN_NAME."/".PROFITQUERY_SUBSCRIBE_WIDGETS_ADMIN_CSS_PATH."icons.css' type='text/css' media='all' />
 		<noscript>				
 				<p>Please enable JavaScript in your browser.</p>				
 		</noscript>
-		";		
+		";
+
+		
+		/**************RATE US*************/
+		if($_GET[action] == 'closeRateUs'){
+			$this->_options[subscribePluginRateUs][timeActivation] = time();
+			update_option('profitquery', $this->_options);
+		}
+		
+		if($_POST[action] == 'RateUs'){
+			$this->_options[subscribePluginRateUs][clickByRate] = 1;
+			update_option('profitquery', $this->_options);
+			print "<script>location.href='https://wordpress.org/support/view/plugin-reviews/mailchimp-bar-exit-popup-subscribe-witget';</script>";
+		}
+		
+		$timeout = 60*60*24*3;				
+		if((time()-(int)$this->_options[subscribePluginRateUs][timeActivation]) >= $timeout && (int)$this->_options[subscribePluginRateUs][clickByRate] == 0){
+			if($this->_options[apiKey]){
+				echo '
+					<form action="'.$this->getSettingsPageUrl().'" method="POST">
+					<input type="hidden" name="action" value="RateUs">
+					<div id="free_profitquery_popup" style="display:block;">
+						<div class="pq_overlay"></div>
+						<div class="pq_popup">
+							<h1>Thank you for stay with Profitquery Team</h1>
+							<p>Our team work hard to make this amazing tools free, take this tools to the next level and all for your website growth. You can make us a little happy. If you like our work, please, rate us.</p>
+							<input type="submit" value="Rate This Work">
+							<input type="button" class="pq_link" value="Close" onclick="location.href=\''.$this->getSettingsPageUrl().'&action=closeRateUs\'">
+						</div>
+					</div>
+					</form>								
+				';
+			}
+		}
+		/**************END RATE US*************/
+		
+		
+		
+		/*POST*/
+		
+		if($_POST[action] == 'editAdditionalOptions'){						
+			if($_POST[additionalOptions][enableGA] == 'on') $this->_options[additionalOptions][enableGA] = 1; else $this->_options[additionalOptions][enableGA] = 0;			
+			update_option('profitquery', $this->_options);
+		}
+						
+		if($_POST[action] == 'subscribeProviderSetup'){
+			if(isset($_POST[subscribeProvider])){
+				unset($this->_options['subscribeProviderUrl']);
+				$this->_options['subscribeProvider'] = sanitize_text_field($_POST[subscribeProvider]);
+				if($_POST[subscribeProviderFormContent]){
+					unset($this->_options['subscribeProviderOption']);					
+					$this->_options['subscribeProviderOption'][$this->_options['subscribeProvider']] = $this->parseSubscribeProviderForm();					
+				}else{					
+					$this->_options['subscribeProviderOption'][$this->_options['subscribeProvider']][is_error] = 1;
+				}				
+			}
+			update_option('profitquery', $this->_options);
+		}
+		
 		
 		if($_POST[action] == 'editAdditionalData'){
 			//follow
@@ -350,10 +495,7 @@ class ProfitQuerySubscribeWidgetsClass
 			';
 		}
 		
-		if($_POST[action] == 'edit'){
-			//Subscribe Design Block			
-			if(trim($_POST[subscribeProviderUrl]) != '') $this->_options['subscribeProviderUrl'] = sanitize_text_field($_POST[subscribeProviderUrl]);
-			
+		if($_POST[action] == 'edit'){			
 			//subscribeBar
 			if($_POST[subscribeBar]){
 				if($_POST[subscribeBar][enabled] == 'on') $this->_options['subscribeBar']['disabled'] = 0; else $this->_options['subscribeBar']['disabled'] = 1;
@@ -361,6 +503,7 @@ class ProfitQuerySubscribeWidgetsClass
 				if(trim($_POST[subscribeBar][typeWindow])) $this->_options['subscribeBar']['typeWindow'] = sanitize_text_field($_POST[subscribeBar][typeWindow]); else $this->_options['subscribeBar']['typeWindow'] = '';
 				if(trim($_POST[subscribeBar][title])) $this->_options['subscribeBar']['title'] = sanitize_text_field($_POST[subscribeBar][title]); else $this->_options['subscribeBar']['title'] = '';
 				if(trim($_POST[subscribeBar][inputEmailTitle])) $this->_options['subscribeBar']['inputEmailTitle'] = sanitize_text_field($_POST[subscribeBar][inputEmailTitle]); else $this->_options['subscribeBar']['inputEmailTitle'] = '';
+				if(trim($_POST[subscribeBar][inputNameTitle])) $this->_options['subscribeBar']['inputNameTitle'] = sanitize_text_field($_POST[subscribeBar][inputNameTitle]); else $this->_options['subscribeBar']['inputNameTitle'] = '';
 				if(trim($_POST[subscribeBar][buttonTitle])) $this->_options['subscribeBar']['buttonTitle'] = sanitize_text_field($_POST[subscribeBar][buttonTitle]); else $this->_options['subscribeBar']['buttonTitle'] = '';
 				if(trim($_POST[subscribeBar][background])) $this->_options['subscribeBar']['background'] = sanitize_text_field($_POST[subscribeBar][background]); else $this->_options['subscribeBar']['background'] = '';
 				if(trim($_POST[subscribeBar][button_color])) $this->_options['subscribeBar']['button_color'] = sanitize_text_field($_POST[subscribeBar][button_color]); else $this->_options['subscribeBar']['button_color'] = '';
@@ -392,6 +535,7 @@ class ProfitQuerySubscribeWidgetsClass
 				if(trim($_POST[subscribeExit][title])) $this->_options['subscribeExit']['title'] = sanitize_text_field($_POST[subscribeExit][title]); else $this->_options['subscribeExit']['title'] = '';
 				if(trim($_POST[subscribeExit][sub_title])) $this->_options['subscribeExit']['sub_title'] = sanitize_text_field($_POST[subscribeExit][sub_title]); else $this->_options['subscribeExit']['sub_title'] = '';
 				if(trim($_POST[subscribeExit][inputEmailTitle])) $this->_options['subscribeExit']['inputEmailTitle'] = sanitize_text_field($_POST[subscribeExit][inputEmailTitle]); else $this->_options['subscribeExit']['inputEmailTitle'] = '';
+				if(trim($_POST[subscribeExit][inputNameTitle])) $this->_options['subscribeExit']['inputNameTitle'] = sanitize_text_field($_POST[subscribeExit][inputNameTitle]); else $this->_options['subscribeExit']['inputNameTitle'] = '';
 				if(trim($_POST[subscribeExit][buttonTitle])) $this->_options['subscribeExit']['buttonTitle'] = sanitize_text_field($_POST[subscribeExit][buttonTitle]); else $this->_options['subscribeExit']['buttonTitle'] = '';
 				if(trim($_POST[subscribeExit][background])) $this->_options['subscribeExit']['background'] = sanitize_text_field($_POST[subscribeExit][background]); else $this->_options['subscribeExit']['background'] = '';
 				if(trim($_POST[subscribeExit][button_color])) $this->_options['subscribeExit']['button_color'] = sanitize_text_field($_POST[subscribeExit][button_color]); else $this->_options['subscribeExit']['button_color'] = '';
@@ -520,10 +664,10 @@ class ProfitQuerySubscribeWidgetsClass
 			';	
 		} else if((int)$this->_options['errorApiKey'] == 0) {
 			if($this->is_subscribe_enabled()){
-				if(trim($this->_options[subscribeProviderUrl]) == ''){
+				if(trim($this->_options[subscribeProvider]) == '' || (int)$this->_options['subscribeProviderOption'][$this->_options['subscribeProvider']][is_error] == 1){
 					echo '
 						<div style="display: block;width: auto; margin: 0 15px 0 5px; background: rgba(242, 20, 67, 0.5); text-align: center;">
-						 <p style="color: rgb(174, 0, 0); font-size: 16px; font-family: arial; padding: 5px; margin: 0px;">For complete install Subscribe tools please set up Subscribe Form action option <a href="'.$this->getSettingsPageUrl().'#setupFormAction" style="text-decoration: none;" >Complete setup</a></p>
+						 <p style="color: rgb(174, 0, 0); font-size: 16px; font-family: arial; padding: 5px; margin: 0px;">For complete install Subscribe tools please copy/paste correct sign up form from selected provider <a href="'.$this->getSettingsPageUrl().'#setupFormAction" style="text-decoration: none;" >Complete setup</a></p>
 						</div>						
 					';
 				}
@@ -644,6 +788,7 @@ class ProfitQuerySubscribeWidgetsClass
 							
 							<label style="display: block;"><p>Heading</p><input type="text" name="subscribeBar[title]" value="<?php echo stripslashes($this->_options[subscribeBar][title]);?>"></label>	
 							<label style="display: block;"><p>Input email text</p><input type="text" name="subscribeBar[inputEmailTitle]" value="<?php echo stripslashes($this->_options[subscribeBar][inputEmailTitle]);?>"></label>
+							<label style="display: block;"><p>Input name text (Aweber)</p><input type="text" name="subscribeBar[inputNameTitle]" value="<?php echo stripslashes($this->_options[subscribeBar][inputNameTitle]);?>"></label>
 							<label style="display: block;"><p>Button</p><input type="text" name="subscribeBar[buttonTitle]" value="<?php echo stripslashes($this->_options[subscribeBar][buttonTitle]);?>"></label>
 							
 							<div class="pq-sm-6 icons" style="padding-left: 0; margin: 27px 0 0;">
@@ -746,6 +891,7 @@ class ProfitQuerySubscribeWidgetsClass
 							<label style="display: block;"><p>Text</p><input type="text" name="subscribeExit[sub_title]" value="<?php echo stripslashes($this->_options[subscribeExit][sub_title]);?>"></label>
 							<label style="display: block;"><p>Button</p><input type="text" name="subscribeExit[buttonTitle]" value="<?php echo stripslashes($this->_options[subscribeExit][buttonTitle]);?>"></label>
 							<label style="display: block;"><p>Input email text</p><input type="text" name="subscribeExit[inputEmailTitle]" value="<?php echo stripslashes($this->_options[subscribeExit][inputEmailTitle]);?>"></label>
+							<label style="display: block;"><p>Input name text (Aweber)</p><input type="text" name="subscribeExit[inputNameTitle]" value="<?php echo stripslashes($this->_options[subscribeExit][inputNameTitle]);?>"></label>
 							
 							<div class="pq-sm-6 icons" style="padding-left: 0; margin: 27px 0 0;">
 							<label>
@@ -900,66 +1046,70 @@ class ProfitQuerySubscribeWidgetsClass
 						<a href="javascript:void(0)" onclick="document.getElementById('Exit_Popup').style.display='none';"><div class="pq_close"></div></a>
 						</div>
 					</div>
+					<input type="submit" class="btn_m_red" value="Save changes">
+					<a href="mailto:support@profitquery.com" target="_blank" class="pq_help">Need help?</a>
+					</form>
+					<a name="setupFormAction"></a>
+					<form action="<?php echo $this->getSettingsPageUrl();?>#setupFormAction" method="post">
+					<input type="hidden" name="action" value="subscribeProviderSetup">					
 					<div class="pq-panel-body">
-						<div class="pq-sm-10" id="mailchimpBlockID"  style="overflow: hidden; padding: 0 20px; margin: 0 auto 10px; background: #F3F3F3;display:none; ">
-						
+						<div class="pq-sm-10" id="mailchimpBlockID"  style="overflow: hidden; padding: 0 20px; margin: 0 auto 10px; background: #F3F3F3;display:none; ">						
+						<h5>Subscribe Provider Setup</h5>
 						<div class="pq-panel-body" style="background: #F3F3F3; padding: 20px 0 0px; margin: 0 15px;">
 							<div class="pq-sm-12">
 								<div class="pq-sm-10 icons" style="margin: 0 auto; float: none;">
-									<label><select style="width: 100%; box-sizing: border-box; padding: 4px; margin: 10px 0 0;">
-										<option value="mailchimp">MailChimp</option>										
+									<label><select onchange="changeSubscribeProviderHelpUrl(1);" id="subscribeProvider" name="subscribeProvider" style="width: 100%; box-sizing: border-box; padding: 4px; margin: 10px 0 0;">
+										<option value="mailchimp" <?php if($this->_options[subscribeProvider] == '' || $this->_options[subscribeProvider] == 'mailchimp') echo "selected";?>>MailChimp</option>
+										<option value="aweber" <?php if($this->_options[subscribeProvider] == 'aweber') echo "selected";?>>AWeber</option>										
 									</select></label>
+									<div class="pq_mch">									
+										<div id="subscribeProviderFormID" class="pq_ent <?php if($this->_options['subscribeProviderOption'][$this->_options[subscribeProvider]]['is_error']) echo 'pq_error';?>" <?php if((int)$this->_options['subscribeProviderOption'][$this->_options[subscribeProvider]]['is_error'] == 1 || !$this->_options['subscribeProviderOption'][$this->_options[subscribeProvider]][formAction]) echo 'style="display:block;";'; else echo 'style="display:none;";';?> />
+											<a href="http://profitquery.com/mailchimp.html" id="subscribeProviderHelpUrl" target="_blank">How to get code</a>
+											<label><p>Paste your code here:</p>
+												<textarea name="subscribeProviderFormContent" rows="5"></textarea>												
+												<input type="submit" value="Save" />												
+											</label>
+										</div>									
+										<div id="subscribeProviderEditLinkID" class="pq_result" onclick="enableSubsribeForm();" <?php if($this->_options['subscribeProviderOption'][$this->_options[subscribeProvider]]['is_error']) echo 'pq_error';?>" <?php if((int)$this->_options['subscribeProviderOption'][$this->_options[subscribeProvider]]['is_error'] == 1 || !$this->_options['subscribeProviderOption'][$this->_options[subscribeProvider]][formAction]) echo 'style="display:none;";'; else echo 'style="display:block;";';?> />
+											<img src="<?php echo plugins_url('images/ok.png', __FILE__);?>" />
+											<a href="javascript:void(0)" onclick="return false;">Change settings</a>
+										</div>
+										<script>
+											function changeSubscribeProviderHelpUrl(withCheckCurrent){
+												var currentSubscribeProvider = '<?php echo $this->_options[subscribeProvider];?>'
+												if(document.getElementById('subscribeProvider').value == 'mailchimp'){
+													document.getElementById('subscribeProviderHelpUrl').href = 'http://profitquery.com/mailchimp.html';
+												}
+												if(document.getElementById('subscribeProvider').value == 'aweber'){
+													document.getElementById('subscribeProviderHelpUrl').href = 'http://profitquery.com/aweber.html';
+												}
+												if(withCheckCurrent == '1'){
+													if(currentSubscribeProvider){
+														if(currentSubscribeProvider == document.getElementById('subscribeProvider').value){
+															document.getElementById('subscribeProviderFormID').style.display = 'none';												
+															document.getElementById('subscribeProviderEditLinkID').style.display = 'block';
+														} else {
+															document.getElementById('subscribeProviderFormID').style.display = 'block';												
+															document.getElementById('subscribeProviderEditLinkID').style.display = 'none';
+														}
+													}
+												}
+											}											
+											function enableSubsribeForm(){												
+												document.getElementById('subscribeProviderFormID').style.display = 'block';												
+												document.getElementById('subscribeProviderEditLinkID').style.display = 'none';												
+											}
+											
+											changeSubscribeProviderHelpUrl();
+										</script>
+									</div>									
 								</div>
-							</div>
-						</div>
-						<div class="pq-panel-body" style="background: #F3F3F3; padding: 0; margin: 0 15px;">
-							<div class="pq-sm-12">
-								<a data-toggle="collapse" href="#step1" onclick="document.getElementById('step1').style.display='block';"><div class="pq-xs-4">
-									<img src="<?php echo plugins_url('images/1.png', __FILE__);?>" />
-									<p style="color: rgb(162, 162, 162); padding: 8px 0 3px;">Click for the list and choose ‘Signup Forms’</p>
-									
-								</div></a>
-								<a data-toggle="collapse" href="#step2" onclick="document.getElementById('step2').style.display='block';"><div class="pq-xs-4">
-									<img src="<?php echo plugins_url('images/2.png', __FILE__);?>" />
-									<p style="color: rgb(162, 162, 162); padding: 8px 0 3px;">Click the Embedded forms option</p>
-									
-								</div></a>
-								<a data-toggle="collapse" href="#step3" onclick="document.getElementById('step3').style.display='block';"><div class="pq-xs-4">
-									<img src="<?php echo plugins_url('images/3.png', __FILE__);?>" />
-									<p style="color: rgb(162, 162, 162); padding: 8px 0 3px;">Paste the Copy/Paste code  Form Action="... ”</p>
-									
-								</div></a>
 							</div>
 						</div>						
-						<a name="setupFormAction"></a>
-						<div class="pq-panel-body" style="  background: #F3F3F3; padding: 0 0 20px; margin: 0 15px;">							
-							<div style="display:none;" id="step1">
-								<div style="max-width: 626px; margin: 0 auto;"><img src="<?php echo plugins_url('images/mailchimp_1.png', __FILE__);?>" /><a data-toggle="collapse" href="#step1" onclick="document.getElementById('step1').style.display='none';"><div class="pq_close"></div></a></div>
-							
-							</div>
-							<div style="display:none;" id="step2">
-								<div style="max-width: 626px; margin: 0 auto;"><img src="<?php echo plugins_url('images/mailchimp_2.png', __FILE__);?>" /><a data-toggle="collapse" href="#step2"  onclick="document.getElementById('step2').style.display='none';"><div class="pq_close"></div></a></div>
-							</div>							
-							<div style="display:none;" id="step3">
-								<div style="max-width: 626px; margin: 0 auto;"><img src="<?php echo plugins_url('images/mailchimp_3.png', __FILE__);?>" /><a data-toggle="collapse" href="#step3"  onclick="document.getElementById('step3').style.display='none';"><div class="pq_close"></div></a></div>
-							</div>
-							
-							<div class="pq-sm-12" style="margin-top: 15px;">
-								<div class="pq-sm-3" style="padding: 4px 0 0; vertical-align: top;">
-									<p>Form Action=</p>
-								</div>
-								<div class="pq-sm-9" style="margin: 0 0 10px;">
-									<label style="display: block; width: 90%; margin: 0px;"><input type="text" name="subscribeProviderUrl" value="<?php echo stripslashes($this->_options[subscribeProviderUrl]);?>"></label>
-								</div>
-								
-							</div>							
-						</div>
-						</div></div>
-						<input type="submit" class="btn_m_red" value="Save changes">
-						<a href="mailto:support@profitquery.com" target="_blank" class="pq_help">Need help?</a>
-					  </form>	
+						</div></div>						
 					</div>
-				  </div>				 
+				  </div>
+				  </form>				 
 				<div class="pq_block" id="v4">					
 						<h4>After Success</h4>
 						
@@ -1349,9 +1499,23 @@ class ProfitQuerySubscribeWidgetsClass
 					  <a href="mailto:support@profitquery.com" target="_blank" class="pq_help">Need help?</a>
 					  </form>
 					</div>
-				  </div>				  
+				  </div>
+				<a name="AdditionalOptions">
+				<div class="pq_uga">
+					<h5>Additional Options</h5>
+					<form action="<?php echo $this->getSettingsPageUrl();?>#AdditionalOptions" method="post">
+					<input type="hidden" name="action" value="editAdditionalOptions">
+							<input type="checkbox" name="additionalOptions[enableGA]" <?php if((int)$this->_options[additionalOptions][enableGA] == 1) echo 'checked';?> ><p>Use google analytics</p>
+							<input type="submit" value="Save">
+					</form>
+				</div>
 			</div>
 <div class="pq-container-fluid" id="free_profitquery" style="padding: 90px 0; margin-top: 80px;">
+	<div class="pq-sm-10" style="overflow: hidden; padding: 20px; margin: 30px 0 155px; background: white;">
+		<h5>For developer</h5>
+			<p>You can bind any enabled profitquery popup for any event on your website.This is wonderfull opportunity to make your website smarter. You can use Thank popup , Share popup, Follow us even Subscribe popup anywhere you want</p>
+		<a href="http://profitquery.com/developer.html" target="_blank"><input type="button" class="btn_m_white" value="Learn More"></a>
+		</div>
 	<div class="pq-sm-12">
 		<h4>More Tools from Profitquery</h4>
 		<div class="pq-sm-10" style="overflow: hidden; padding: 20px; margin: 30px 0 25px; background: white;">
