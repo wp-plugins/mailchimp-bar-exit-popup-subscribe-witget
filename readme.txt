@@ -196,8 +196,6 @@ All of the options required through this plugin require javascript. JavaScript m
 = 1.0.1 =
 * JS update
 
-== PHP Version ==
-
 == Marketing Bar Integration ==
 * <a href="http://profitquery.com/mailchimp.html">Mailchimp integration</a>
 * <a href="http://profitquery.com/aweber.html">Aweber integration</a>
