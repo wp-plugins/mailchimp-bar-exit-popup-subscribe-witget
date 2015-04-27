@@ -1,4 +1,4 @@
-=== Aweber Mailchimp Bar + Exit Popup | Subscribe Widget ===
+=== Aweber Mailchimp Bar + Exit Popup | Subscribe ===
 Contributors: schemotechnik, ilya_v, frenly_girl
 Donate link: http://profitquery.com/subscribe_witgets.html
 Tags: contact information, email, profitquery, profitquery widgets, bar, mailchimp bar, aweber, aweber subscribe, aweber subscription, exit popup, exit visitors, subscribe, mailchimp subscribe, subscribers, widget, widgets, tools, mailchimp, mailchimp for wordpress, mailchimp for wp, MailChimp form, mailchimp sign-up, newsletter, newsletter form, newsletter sign-up, free widgets, more subscribers, more subscription, growth tools, mailchimp tools, welcome bar, hello bar, exit monitor, exit intent

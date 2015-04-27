@@ -19,7 +19,7 @@
 * +--------------------------------------------------------------------------+
 */
 /**
-* Plugin Name: Aweber Mailchimp Bar + Exit Popup | Subscribe Widget
+* Plugin Name: Aweber Mailchimp Bar + Exit Popup | Subscribe
 * Plugin URI: http://profitquery.com/subscribe_witgets.html
 * Description: Smarter mailchimp, aweber subscribe tools for collect customers email, e-mail list builder and growth followers. Bar and exit intent subscribe popup.
 * Version: 2.1.0
