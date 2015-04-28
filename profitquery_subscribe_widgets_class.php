@@ -379,7 +379,7 @@ class ProfitQuerySubscribeWidgetsClass
 		
 		/**************RATE US*************/
 		if($_GET[action] == 'closeRateUs'){
-			$this->_options[subscribePluginRateUs][timeActivation] = time();
+			$this->_options[subscribePluginRateUs][timeActivation] = time()+60*60*24*4;
 			update_option('profitquery', $this->_options);
 		}
 		
