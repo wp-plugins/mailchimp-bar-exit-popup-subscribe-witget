@@ -80,7 +80,6 @@ require_once 'profitquery_subscribe_widgets_class.php';
 $ProfitQuerySubscribeWidgetsClass = new ProfitQuerySubscribeWidgetsClass();
 
 
-
 add_action('init', 'profitquery_subscribe_widgets_init');
 
 
@@ -133,7 +132,7 @@ function profitquery_subscribe_message_on_plugin_page(){
 	}
 }
 
-
+//hack from cache plugin
 function profitquery_subscribe_widgets_hack_for_cach_code(){
 	global $profitquery;
 	if($profitquery[apiKey]){
