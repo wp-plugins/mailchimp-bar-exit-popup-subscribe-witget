@@ -4,7 +4,7 @@ Donate link: http://profitquery.com/subscribe_witgets.html
 Tags: contact information, email, profitquery, profitquery widgets, bar, mailchimp bar, aweber, aweber subscribe, aweber subscription, exit popup, exit visitors, subscribe, mailchimp subscribe, subscribers, widget, widgets, tools, mailchimp, mailchimp for wordpress, mailchimp for wp, MailChimp form, mailchimp sign-up, newsletter, newsletter form, newsletter sign-up, free widgets, more subscribers, more subscription, growth tools, mailchimp tools, welcome bar, hello bar, exit monitor, exit intent
 Requires at least: 2.9
 Tested up to: 4.2.1
-Stable tag: 2.1.0
+Stable tag: 2.1.1
 License: GPL 2. See License below for copyright jots and tittles.
 
 Smarter aweber & mailchimp subscribe tools for collect customers email, e-mail list builder and growth followers. Bar and exit intent popup.
@@ -151,6 +151,9 @@ All of the options required through this plugin require javascript. JavaScript m
 8. Many header images popup
 
 == Changelog ==
+
+= 2.1.1 =
+* js update
 
 = 2.1 =
 * add Aweber integration

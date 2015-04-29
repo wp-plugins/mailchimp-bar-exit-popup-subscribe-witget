@@ -23,7 +23,7 @@
 * @package  Wordpress_Plugin
 * @author   ShemOtechnik Profitquery Team <support@profitquery.com>
 * @license  http://www.php.net/license/3_01.txt  PHP License 3.01
-* @version  SVN: 2.1.0
+* @version  SVN: 2.1.1
 */
 
 class ProfitQuerySubscribeWidgetsClass
@@ -77,8 +77,9 @@ class ProfitQuerySubscribeWidgetsClass
         if (get_option('profitquery')) {
 			$this->_options[subscribe_widgets_loaded] = 1;
 			
-			$this->_options[subscribePluginRateUs] = array();
-			$this->_options[subscribePluginRateUs][timeActivation] = time();
+			if((int)$this->_options[subscribePluginRateUs][timeActivation] == 0){			
+				$this->_options[subscribePluginRateUs][timeActivation] = time();
+			}
 			
 			update_option('profitquery', $this->_options);
         }
