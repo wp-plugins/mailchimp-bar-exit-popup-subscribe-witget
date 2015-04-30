@@ -23,7 +23,7 @@
 * @package  Wordpress_Plugin
 * @author   ShemOtechnik Profitquery Team <support@profitquery.com>
 * @license  http://www.php.net/license/3_01.txt  PHP License 3.01
-* @version  SVN: 2.1.2
+* @version  SVN: 2.1.3
 */
 
 class ProfitQuerySubscribeWidgetsClass
@@ -245,8 +245,9 @@ class ProfitQuerySubscribeWidgetsClass
 					if($k == 'TW') $return[follow_socnet][$k][url] = 'https://twitter.com/'.$v;
 					if($k == 'GP') $return[follow_socnet][$k][url] = 'https://plus.google.com/'.$v;
 					if($k == 'PI') $return[follow_socnet][$k][url] = 'https://pinterest.com/'.$v;
-					if($k == 'VK') $return[follow_socnet][$k][url] = 'https://vk.com/'.$v;
-					if($k == 'OD') $return[follow_socnet][$k][url] = 'https://ok.ru/'.$v;				
+					if($k == 'VK') $return[follow_socnet][$k][url] = 'http://vk.com/'.$v;
+					if($k == 'RSS') $return[follow_socnet][$k][url] = $v;				
+					if($k == 'IG') $return[follow_socnet][$k][url] = 'http://instagram.com/'.$v;						
 				}
 			}
 			
@@ -450,6 +451,8 @@ class ProfitQuerySubscribeWidgetsClass
 					if(trim($_POST[follow][follow_socnet][PI]) != '') $this->_options[follow][follow_socnet][PI] = sanitize_text_field($_POST[follow][follow_socnet][PI]); else $this->_options[follow][follow_socnet][PI] = '';
 					if(trim($_POST[follow][follow_socnet][VK]) != '') $this->_options[follow][follow_socnet][VK] = sanitize_text_field($_POST[follow][follow_socnet][VK]); else $this->_options[follow][follow_socnet][VK] = '';
 					if(trim($_POST[follow][follow_socnet][OD]) != '') $this->_options[follow][follow_socnet][OD] = sanitize_text_field($_POST[follow][follow_socnet][OD]); else $this->_options[follow][follow_socnet][OD] = '';
+					if(trim($_POST[follow][follow_socnet][RSS]) != '') $this->_options[follow][follow_socnet][RSS] = sanitize_text_field($_POST[follow][follow_socnet][RSS]); else $this->_options[follow][follow_socnet][RSS] = '';
+					if(trim($_POST[follow][follow_socnet][IG]) != '') $this->_options[follow][follow_socnet][IG] = sanitize_text_field($_POST[follow][follow_socnet][IG]); else $this->_options[follow][follow_socnet][IG] = '';
 				}
 			}
 			
@@ -1272,7 +1275,7 @@ class ProfitQuerySubscribeWidgetsClass
 									<p>twitter.com/</p><input type="text" name="follow[follow_socnet][TW]" value="<?php echo stripslashes($this->_options[follow][follow_socnet][TW]);?>">
 										
 							</div></label>
-							<div id="collapseservices" style="display:none;">
+							<div id="MoreFollowSocialNetworks" style="display:none;">
 							<label style="display: block;"><div class="x30">
 								<div class="pq_gp"></div>
 									<p>plus.google.com/</p><input type="text" name="follow[follow_socnet][GP]" value="<?php echo stripslashes($this->_options[follow][follow_socnet][GP]);?>">
@@ -1292,8 +1295,16 @@ class ProfitQuerySubscribeWidgetsClass
 								<div class="pq_od"></div>
 									<p>ok.ru/</p><input type="text" name="follow[follow_socnet][OD]" value="<?php echo stripslashes($this->_options[follow][follow_socnet][OD]);?>">
 							</div></label>
+							<label style="display: block;"><div class="x30">
+								<div class="pq_ig"></div>
+									<p>instagram.com/</p><input type="text" name="follow[follow_socnet][IG]" value="<?php echo stripslashes($this->_options[follow][follow_socnet][IG]);?>">
+							</div></label>
+							<label style="display: block;"><div class="x30">
+								<div class="pq_rs"></div>
+									<p>RSS Url Address</p><input type="text" name="follow[follow_socnet][RSS]" value="<?php echo stripslashes($this->_options[follow][follow_socnet][RSS]);?>">
+							</div></label>
 							</div>
-							<button type="button" class="pq-btn-link btn-bg" onclick="document.getElementById('collapseservices').style.display='block';" >More Services</button>
+							<button type="button" class="pq-btn-link btn-bg" onclick="document.getElementById('MoreFollowSocialNetworks').style.display='block';" >More Services</button>
 						</div>
 						<div class="clear"></div>
 							<label style="width: 49%; display: inline-block; margin: 5px 0 0px;">

@@ -31,7 +31,7 @@
 #free_profitquery .pq-btn-link {background: none; cursor: pointer;}
 #free_profitquery .pq-btn-link:hover {cursor: pointer;}
 #free_profitquery .pq-sm-6 .pq-btn-link {font-size: 16px; color: #F4335C; border: none;}
-#free_profitquery .pq-sm-12 .pq-btn-link, .pq-sm-12+.pq-btn-link, #collapseservices+.pq-btn-link {font-size: 16px; color: red; border: none;}
+#free_profitquery .pq-sm-12 .pq-btn-link, .pq-sm-12+.pq-btn-link, #MoreFollowSocialNetworks+.pq-btn-link {font-size: 16px; color: red; border: none;}
 #free_profitquery .pq-xs-4 {padding-top: 13px; margin-bottom: 15px; display: inline-block; width: 32%; vertical-align: top;}
 #free_profitquery .pq-xs-4:hover {background: white;}
 #free_profitquery .pq-sm-3 {width: 25%; display: inline-block;}
@@ -74,7 +74,7 @@
 #free_profitquery .pq-items h5 {font-size: 26px; color: #939393; margin:0;}
 #free_profitquery .pq-items input[type="button"] {width: initial; margin: 20px auto 8px; text-transform: uppercase; background: transparent; color: grey;  border: 1px solid red; font-size: 14px; font-family: arial; padding: 3px 26px;}
 /*#free_profitquery .pq_pro {width: 46px; height: 46px; position: absolute; top: 0; right: 0; background: url(../images/pro.png);}*/
-#free_profitquery .pq_services .pq_fb, #free_profitquery .pq_services .pq_tw, #free_profitquery .pq_services .pq_gp, #free_profitquery .pq_services .pq_pi, #free_profitquery .pq_services .pq_vk, #free_profitquery .pq_services .pq_od {display: inline-block; float: left;}
+#free_profitquery .pq_services .pq_fb, #free_profitquery .pq_services .pq_tw, #free_profitquery .pq_services .pq_gp, #free_profitquery .pq_services .pq_pi, #free_profitquery .pq_services .pq_vk, #free_profitquery .pq_services .pq_od, #free_profitquery .pq_services .pq_ig, #free_profitquery .pq_services .pq_rs {display: inline-block; float: left;}
 #free_profitquery .pq_services input[type="text"] {width: 65%; float: right; display: inline-block;}
 #free_profitquery .pq_services p {display: inline-block; line-height: 30px; float: left; padding-left: 10px;}
 
