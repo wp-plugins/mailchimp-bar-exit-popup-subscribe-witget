@@ -28,6 +28,8 @@
 * Author URI: http://profitquery.com/?utm_campaign=subscribe_widgets_wp
 */
 
+
+
 $profitquery = get_option('profitquery');
 
 /*RESAVE BLOCK. For Old Version only*/

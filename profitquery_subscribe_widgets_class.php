@@ -26,6 +26,8 @@
 * @version  SVN: 2.1.3
 */
 
+
+
 class ProfitQuerySubscribeWidgetsClass
 {
 	/** Profitquery Settings **/
