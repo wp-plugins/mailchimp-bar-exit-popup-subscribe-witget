@@ -22,7 +22,7 @@
 * Plugin Name: Aweber Mailchimp Subscribe Bar + Exit Popup
 * Plugin URI: http://profitquery.com/subscribe_witgets.html
 * Description: Smarter mailchimp, aweber subscribe tools for collect customers email, e-mail list builder and growth followers. Bar and exit intent subscribe popup.
-* Version: 2.1.3
+* Version: 2.1.4
 *
 * Author: Profitquery Team <support@profitquery.com>
 * Author URI: http://profitquery.com/?utm_campaign=subscribe_widgets_wp
@@ -92,48 +92,9 @@ function profitquery_subscribe_widgets_init(){
 	if ( !is_admin() && $profitquery[apiKey] && !$profitquery['errorApiKey'] && !$profitquery['aio_widgets_loaded']){
 		add_action('wp_head', 'profitquery_subscribe_widgets_hack_for_cach_code');		
 		add_action('wp_footer', 'profitquery_subscribe_widgets_insert_code');
-	}
-	//echo rate us	
-	if(is_admin() && $ProfitQuerySubscribeWidgetsClass->isPluginPage()){			
-		add_action('admin_head', 'profitquery_subscribe_message_on_plugin_page');
-	}
+	}	
 }
 
-
-function profitquery_subscribe_message_on_plugin_page(){	
-	global $profitquery;	
-	$timeout = 60*60*24*3;
-	
-	if((time()-(int)$profitquery[subscribePluginRateUs][timeActivation]) >= $timeout && (int)$profitquery[subscribePluginRateUs][clickByRate] == 0 && (int)$profitquery[subscribe_widgets_loaded] == 1){	
-	?>		
-	<div class="updated" style="padding: 0; margin: 0; border: none; background: none;">
-	<style type="text/css">
-	 
-	.pq_activate{min-width:825px;padding:5px;margin:15px 0;background:lightgrey; -moz-border-radius:3px;border-radius:3px;-webkit-border-radius:3px;position:relative;overflow:hidden}
-	.pq_activate .aa_a{position:absolute;top:-5px;right:10px;font-size:140px;color:#769F33;font-family:Georgia, "Times New Roman", Times, serif;z-index:1}
-	.pq_activate .aa_button{font-weight:bold;border:1px solid red;font-size:15px;text-align:center;padding:9px 0 8px 0;color:#FFF;background:red;-moz-border-radius:2px;border-radius:2px;-webkit-border-radius:2px;opacity:.8;}
-	.pq_activate .aa_button:hover{opacity:1;}
-	.pq_activate .aa_button_border{border:1px solid transparent;-moz-border-radius:2px;border-radius:2px;-webkit-border-radius:2px;}
-	.pq_activate .aa_button_container{cursor:pointer;display:inline-block;padding:5px;-moz-border-radius:2px;border-radius:2px;-webkit-border-radius:2px;width:266px; float: right;  margin-right: 25px;}
-	.pq_activate .aa_description{position:absolute;top:22px;margin-left:25px;color:rgb(63, 63, 63);font-size:15px;z-index:1000}
-
-	</style>
-				
-		<form name="pq_activate" action="<?php echo admin_url("options-general.php?page=" . PROFITQUERY_SUBSCRIBE_WIDGETS_PAGE_NAME);?>" method="POST"> 			
-			<div class="pq_activate">  
-				
-				<div class="aa_button_container" onclick="document.pq_activate.submit();">  
-					<div class="aa_button_border">          
-						<div class="aa_button">Read message</div>  
-					</div>  
-				</div>  
-				<div class="aa_description">System detected new message from Profitquery Team</div>  
-			</div>  
-		</form>  
-	</div>	
-	<?php
-	}
-}
 
 //hack from cache plugin
 function profitquery_subscribe_widgets_hack_for_cach_code(){

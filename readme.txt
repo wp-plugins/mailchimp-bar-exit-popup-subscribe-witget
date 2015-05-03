@@ -4,7 +4,7 @@ Donate link: http://profitquery.com/subscribe_witgets.html
 Tags: contact information, email, profitquery, profitquery widgets, bar, mailchimp bar, aweber, aweber subscribe, aweber subscription, exit popup, exit visitors, subscribe, mailchimp subscribe, subscribers, widget, widgets, tools, mailchimp, mailchimp for wordpress, mailchimp for wp, MailChimp form, mailchimp sign-up, newsletter, newsletter form, newsletter sign-up, free widgets, more subscribers, more subscription, growth tools, mailchimp tools, welcome bar, hello bar, exit monitor, exit intent, marketing
 Requires at least: 2.9
 Tested up to: 4.2.1
-Stable tag: 2.1.3
+Stable tag: 2.1.4
 License: GPL 2. See License below for copyright jots and tittles.
 
 Smarter aweber & mailchimp subscribe tools for collect customers email, e-mail list builder and growth followers. Bar and exit intent popup.
@@ -18,6 +18,9 @@ We prepare for you amazing subscribe bar, which always on the top, and exit inte
 >Profitquery is fast-growing intelligence system for boost any website. For now we have over 20 smart tools some of them are unique. And this is just the beginning.
 >Our team make the complex simple. Make pro version similar tools - free. And it's all thanks unprecedented use of the Latest Technology. Vector graphics, 2D & 3D animation, more than you can imagine for your website for free right now.
 >
+>Profitquery use over 1 000 000 people around the world per day. For wordpress community we prepare a few plugin for demonstration a small part profitquery platform features. Choosing profitquery you get access to the latest developments, <a href="https://wordpress.org/support/view/plugin-reviews/share-subscribe-contact-aio-widget">great support team</a> and you can influence the course of development.
+>We work hard seven days a week to make you website smarter and growth faster.
+>
 >AIO Widgets collect most popular tools for growth your email subscribers, social subscribers, for get feedback from customers, for make your content virals. You do not need to go to the any dashboard, all tools can set up on your admin area.
 >All tools can be use for free or pro version(for more efficient, intelligent use). Thats why you can trust Profitquery Platform to increase your blog, website, ecommerce or any online business. 
 >
@@ -26,7 +29,10 @@ We prepare for you amazing subscribe bar, which always on the top, and exit inte
 
 = Features =
 * All product for free right now
-* Mailchimp, Aweber integration
+* Mailchimp subscribe bar
+* Mailchimp exit intent subscription
+* Aweber subscribe bar
+* Aweber exit intent subscription
 * Mobile adaptation
 * Asynchronous loading. Load Optimized
 * All features setup on your admin area
@@ -151,6 +157,9 @@ All of the options required through this plugin require javascript. JavaScript m
 8. Many header images popup
 
 == Changelog ==
+
+= 2.1.4 =
+* core update
 
 = 2.1.3 =
 * add rss follow button
