@@ -78,7 +78,9 @@ class ProfitQuerySubscribeWidgetsClass
     {
         if (get_option('profitquery')) {
 			$this->_options[subscribe_widgets_loaded] = 1;
-						
+			if((int)$this->_options[subscribePluginRateUs][timeActivation] == 0){			
+				$this->_options[subscribePluginRateUs][timeActivation] = time();
+			}
 			update_option('profitquery', $this->_options);
         }
     }
@@ -376,7 +378,38 @@ class ProfitQuerySubscribeWidgetsClass
 		</noscript>
 		";				
 		
+		/**************US*************/
+		if($_GET[action] == 'closeRateUs'){
+			$this->_options[subscribePluginRateUs][timeActivation] = time()+60*60*24*4;
+			update_option('profitquery', $this->_options);
+		}
 		
+		if($_POST[action] == 'RateUs'){
+			$this->_options[subscribePluginRateUs][clickByRate] = 1;
+			update_option('profitquery', $this->_options);
+			print "<script>location.href='https://wordpress.org/support/view/plugin-reviews/mailchimp-bar-exit-popup-subscribe-witget';</script>";
+		}
+		
+		$timeout = 60*60*24*3;				
+		if((time()-(int)$this->_options[subscribePluginRateUs][timeActivation]) >= $timeout && (int)$this->_options[subscribePluginRateUs][clickByRate] == 0){
+			if($this->_options[apiKey]){
+				echo '
+					<form action="'.$this->getSettingsPageUrl().'" method="POST">
+					<input type="hidden" name="action" value="RateUs">
+					<div id="free_profitquery_popup" style="display:block;">
+						<div class="pq_overlay"></div>
+						<div class="pq_popup">
+							<h1>Thank you for stay with Profitquery Team</h1>
+							<p>Our team work hard to make this amazing tools free, take this tools to the next level and all for your website growth. You can make us a little happy. If you like our work, please, rate us.</p>
+							<input type="submit" value="Rate This Work">
+							<input type="button" class="pq_link" value="Close" onclick="location.href=\''.$this->getSettingsPageUrl().'&action=closeRateUs\'">
+						</div>
+					</div>
+					</form>								
+				';
+			}
+		}
+		/**************END US*************/
 		
 		/*POST*/
 		
