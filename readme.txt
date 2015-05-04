@@ -19,7 +19,7 @@ We prepare for you amazing subscribe bar, which always on the top, and exit inte
 >Our team make the complex simple. Make pro version similar tools - free. And it's all thanks unprecedented use of the Latest Technology. Vector graphics, 2D & 3D animation, more than you can imagine for your website for free right now.
 >
 >Profitquery use over 1 000 000 people around the world per day. For wordpress community we prepare a few plugin for demonstration a small part profitquery platform features. Choosing profitquery you get access to the latest developments, <a href="https://wordpress.org/support/view/plugin-reviews/share-subscribe-contact-aio-widget">great support team</a> and you can influence the course of development.
->We work hard seven days a week to make you website smarter and growth faster.
+>We work hard seven days a week to make your website smarter and growth faster.
 >
 >AIO Widgets collect most popular tools for growth your email subscribers, social subscribers, for get feedback from customers, for make your content virals. You do not need to go to the any dashboard, all tools can set up on your admin area.
 >All tools can be use for free or pro version(for more efficient, intelligent use). Thats why you can trust Profitquery Platform to increase your blog, website, ecommerce or any online business. 
