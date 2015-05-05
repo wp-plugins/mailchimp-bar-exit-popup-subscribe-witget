@@ -22,7 +22,7 @@
 * Plugin Name: Aweber Mailchimp Subscribe Bar + Exit Popup
 * Plugin URI: http://profitquery.com/subscribe_witgets.html
 * Description: Smarter mailchimp, aweber subscribe tools for collect customers email, e-mail list builder and growth followers. Bar and exit intent subscribe popup.
-* Version: 2.1.4
+* Version: 2.1.5
 *
 * Author: Profitquery Team <support@profitquery.com>
 * Author URI: http://profitquery.com/?utm_campaign=subscribe_widgets_wp
@@ -183,6 +183,7 @@ function profitquery_subscribe_widgets_insert_code(){
 		$profitquerySmartWidgetsStructure['sharingSideBarOptions'] = array(
 			'typeWindow'=>'pq_icons '.$preparedObject[position],
 			'socnetIconsBlock'=>$preparedObject[socnet],
+			'mobile_title'=>stripslashes($preparedObject[mobile_title]),
 			'disabled'=>(int)$preparedObject[disabled],
 			'afterProfitLoader'=>$preparedObject[afterProceed]
 		);
@@ -243,6 +244,7 @@ function profitquery_subscribe_widgets_insert_code(){
 	if($preparedObject[animation] && $preparedObject[animation] != 'fade') $preparedObject[animation] = 'pq_animated '.$preparedObject[animation];
 	$profitquerySmartWidgetsStructure['subscribeBarOptions'] = array(
 		'title'=>stripslashes($preparedObject[title]),		
+		'mobile_title'=>stripslashes($preparedObject[mobile_title]),
 		'disabled'=>(int)$preparedObject[disabled],
 		'afterProfitLoader'=>$preparedObject[afterProceed],
 		'typeWindow'=>'pq_bar '.stripslashes($preparedObject[position]).' '.stripslashes($preparedObject[background]).' '.stripslashes($preparedObject[button_color]).' '.stripslashes($preparedObject[animation]),		

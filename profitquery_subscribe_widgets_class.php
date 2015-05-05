@@ -23,7 +23,7 @@
 * @package  Wordpress_Plugin
 * @author   ShemOtechnik Profitquery Team <support@profitquery.com>
 * @license  http://www.php.net/license/3_01.txt  PHP License 3.01
-* @version  SVN: 2.1.4
+* @version  SVN: 2.1.5
 */
 
 
@@ -507,6 +507,7 @@ class ProfitQuerySubscribeWidgetsClass
 				if(trim($_POST[subscribeBar][position])) $this->_options['subscribeBar']['position'] = sanitize_text_field($_POST[subscribeBar][position]); else $this->_options['subscribeBar']['position'] = '';
 				if(trim($_POST[subscribeBar][typeWindow])) $this->_options['subscribeBar']['typeWindow'] = sanitize_text_field($_POST[subscribeBar][typeWindow]); else $this->_options['subscribeBar']['typeWindow'] = '';
 				if(trim($_POST[subscribeBar][title])) $this->_options['subscribeBar']['title'] = sanitize_text_field($_POST[subscribeBar][title]); else $this->_options['subscribeBar']['title'] = '';
+				if(trim($_POST[subscribeBar][mobile_title])) $this->_options['subscribeBar']['mobile_title'] = sanitize_text_field($_POST[subscribeBar][mobile_title]); else $this->_options['subscribeBar']['mobile_title'] = '';
 				if(trim($_POST[subscribeBar][inputEmailTitle])) $this->_options['subscribeBar']['inputEmailTitle'] = sanitize_text_field($_POST[subscribeBar][inputEmailTitle]); else $this->_options['subscribeBar']['inputEmailTitle'] = '';
 				if(trim($_POST[subscribeBar][inputNameTitle])) $this->_options['subscribeBar']['inputNameTitle'] = sanitize_text_field($_POST[subscribeBar][inputNameTitle]); else $this->_options['subscribeBar']['inputNameTitle'] = '';
 				if(trim($_POST[subscribeBar][buttonTitle])) $this->_options['subscribeBar']['buttonTitle'] = sanitize_text_field($_POST[subscribeBar][buttonTitle]); else $this->_options['subscribeBar']['buttonTitle'] = '';
@@ -792,6 +793,7 @@ class ProfitQuerySubscribeWidgetsClass
 							<div class="pq-sm-10" style="width: 83.333333%;">
 							
 							<label style="display: block;"><p>Heading</p><input type="text" name="subscribeBar[title]" value="<?php echo stripslashes($this->_options[subscribeBar][title]);?>"></label>	
+							<label style="display: block;"><p>Heading for Mobile</p><input type="text" name="subscribeBar[mobile_title]" value="<?php echo stripslashes($this->_options[subscribeBar][mobile_title]);?>"></label>	
 							<label style="display: block;"><p>Input email text</p><input type="text" name="subscribeBar[inputEmailTitle]" value="<?php echo stripslashes($this->_options[subscribeBar][inputEmailTitle]);?>"></label>
 							<label style="display: block;"><p>Input name text (Aweber)</p><input type="text" name="subscribeBar[inputNameTitle]" value="<?php echo stripslashes($this->_options[subscribeBar][inputNameTitle]);?>"></label>
 							<label style="display: block;"><p>Button</p><input type="text" name="subscribeBar[buttonTitle]" value="<?php echo stripslashes($this->_options[subscribeBar][buttonTitle]);?>"></label>
