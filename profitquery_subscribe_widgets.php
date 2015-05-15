@@ -265,7 +265,7 @@ function profitquery_subscribe_widgets_insert_code(){
 			var _isPQLibraryLoaded = false;
 			s.type = 'text/javascript';
 			s.async = true;
-			s.src = '".plugins_url()."/".PROFITQUERY_SUBSCRIBE_WIDGETS_PLUGIN_NAME."/js/lite.profitquery.min.js?apiKey=".$profitquery[apiKey]."';
+			s.src = '//litelib.profitquery.com/api/lite.profitquery.min.js?apiKey=".$profitquery[apiKey]."';
 			s.onload = function(){
 				if ( !_isPQLibraryLoaded )
 				{					
