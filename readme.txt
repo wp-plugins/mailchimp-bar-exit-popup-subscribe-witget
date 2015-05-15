@@ -140,6 +140,10 @@ You can write about problem on the plugin forum or email us <a href="mailto:supp
 = Is plugin by Profitquery free? =
 Yes, it's free.
 
+= How Profitquery work =
+Profitquery is SaaS marketing intelligence platform, thats why for correct work on any website we need load javascript library from our cdn server. 
+Profitquery javascript library already minimized and have asynchronous mode loading for optimized your website.
+
 = Do I need to create an account? =
 No. All needfull information profitquery get automatically. That's why Profitquery can generate secure apiKey without any sign-up.
 
