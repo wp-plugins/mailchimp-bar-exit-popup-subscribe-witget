@@ -23,7 +23,7 @@
 * @package  Wordpress_Plugin
 * @author   ShemOtechnik Profitquery Team <support@profitquery.com>
 * @license  http://www.php.net/license/3_01.txt  PHP License 3.01
-* @version  SVN: 2.1.5
+* @version  SVN: 2.1.6
 */
 
 
@@ -377,39 +377,7 @@ class ProfitQuerySubscribeWidgetsClass
 				<p>Please enable JavaScript in your browser.</p>				
 		</noscript>
 		";				
-		
-		/**************US*************/
-		if($_GET[action] == 'closeRateUs'){
-			$this->_options[subscribePluginRateUs][timeActivation] = time()+60*60*24*4;
-			update_option('profitquery', $this->_options);
-		}
-		
-		if($_POST[action] == 'RateUs'){
-			$this->_options[subscribePluginRateUs][clickByRate] = 1;
-			update_option('profitquery', $this->_options);
-			print "<script>location.href='https://wordpress.org/support/view/plugin-reviews/mailchimp-bar-exit-popup-subscribe-witget';</script>";
-		}
-		
-		$timeout = 60*60*24*3;				
-		if((time()-(int)$this->_options[subscribePluginRateUs][timeActivation]) >= $timeout && (int)$this->_options[subscribePluginRateUs][clickByRate] == 0){
-			if($this->_options[apiKey]){
-				echo '
-					<form action="'.$this->getSettingsPageUrl().'" method="POST">
-					<input type="hidden" name="action" value="RateUs">
-					<div id="free_profitquery_popup" style="display:block;">
-						<div class="pq_overlay"></div>
-						<div class="pq_popup">
-							<h1>Thank you for stay with Profitquery Team</h1>
-							<p>Our team work hard to make this amazing tools free, take this tools to the next level and all for your website growth. You can make us a little happy. If you like our work, please, rate us.</p>
-							<input type="submit" value="Rate This Work">
-							<input type="button" class="pq_link" value="Close" onclick="location.href=\''.$this->getSettingsPageUrl().'&action=closeRateUs\'">
-						</div>
-					</div>
-					</form>								
-				';
-			}
-		}
-		/**************END US*************/
+				
 		
 		/*POST*/
 		
@@ -707,7 +675,29 @@ class ProfitQuerySubscribeWidgetsClass
 							}
 						}catch(err){};
 					}
-				  </script>				  
+				  </script>
+				<div style="overflow: hidden; padding: 20px; margin: 10px 0 25px;">
+				
+					<h5>Thanks for your choose!</h5>
+					<p style="padding: 0px 45px"> Latest news and plans of our team. </p><br>
+					<div>
+						<p><strong>New in Profitquery AIO Widgets 2.1.9</strong></p>
+						<p><strong>1.</strong> Add new share provider Evernote, Pocket, Kindle, Flipboard. If you need a new share provider, just email us <a href="mailto:support@profitquery.com">support@profitquery.com.</a> <strong>2.</strong> Add wonderfull features. Now you can share image from sharing sidebar through (Tumblr, Pinterest, VK). All image profitquery collect from your page, if profitquery library not found any photo by click on Tumblr or Pinterest or VK start default sharing. <strong>3.</strong> Try to add Opera mini support (most of kind tools not displaying on this browser)</p><br>						
+						
+						
+						<p>For wordpress community we make a few plugin for demonstration a small part of Profitquery platform features. AIO widgets most popular.
+						Now we working for pro version wordpress plugin with new dashboard where you can generate any popup you want, ecom plugin (referral system etc.)
+						If you have any question or feedback or some ideas you can email us any time you want <a href="mailto:support@profitquery.com;">support@profitquery.com</a> or visit profitquery <a href="http://profitquery.com/community.html" target="_blank">community page</a></p><br>
+						<a href="http://profitquery.com/community.html" target="_blank"><input type="button" class="" value="Community"></a><br><br><br>
+						<img id="" src="<?php echo plugins_url('images/stars.png', __FILE__);?>" />
+						<p>We work hard 7 days of week for make a best ever growth tools. If you like our work, you can make our team happy, please, rate our plugin.</p>
+					</div><br>
+									
+					
+				<a href="https://wordpress.org/support/view/plugin-reviews/mailchimp-bar-exit-popup-subscribe-witget" target="_blank"><input type="button" class="" value="Please Rate Plugin"></a>
+				
+				
+				</div>
 					<div class="pq_block" id="v1">
 					
 						<h4>Subscribe Tools</h4>
