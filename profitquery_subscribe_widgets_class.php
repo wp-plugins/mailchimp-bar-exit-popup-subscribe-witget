@@ -676,28 +676,13 @@ class ProfitQuerySubscribeWidgetsClass
 						}catch(err){};
 					}
 				  </script>
-				<div style="overflow: hidden; padding: 20px; margin: 10px 0 25px;">
-				
-					<h5>Thanks for your choose!</h5>
-					<p style="padding: 0px 45px"> Latest news and plans of our team. </p><br>
-					<div>
-						<p><strong>New in Profitquery AIO Widgets 2.1.9</strong></p>
-						<p><strong>1.</strong> Add new share provider Evernote, Pocket, Kindle, Flipboard. If you need a new share provider, just email us <a href="mailto:support@profitquery.com">support@profitquery.com.</a> <strong>2.</strong> Add wonderfull features. Now you can share image from sharing sidebar through (Tumblr, Pinterest, VK). All image profitquery collect from your page, if profitquery library not found any photo by click on Tumblr or Pinterest or VK start default sharing. <strong>3.</strong> Try to add Opera mini support (most of kind tools not displaying on this browser)</p><br>						
-						
-						
-						<p>For wordpress community we make a few plugin for demonstration a small part of Profitquery platform features. AIO widgets most popular.
-						Now we working for pro version wordpress plugin with new dashboard where you can generate any popup you want, ecom plugin (referral system etc.)
-						If you have any question or feedback or some ideas you can email us any time you want <a href="mailto:support@profitquery.com;">support@profitquery.com</a> or visit profitquery <a href="http://profitquery.com/community.html" target="_blank">community page</a></p><br>
-						<a href="http://profitquery.com/community.html" target="_blank"><input type="button" class="" value="Community"></a><br><br><br>
-						<img id="" src="<?php echo plugins_url('images/stars.png', __FILE__);?>" />
-						<p>We work hard 7 days of week for make a best ever growth tools. If you like our work, you can make our team happy, please, rate our plugin.</p>
-					</div><br>
-									
-					
-				<a href="https://wordpress.org/support/view/plugin-reviews/mailchimp-bar-exit-popup-subscribe-witget" target="_blank"><input type="button" class="" value="Please Rate Plugin"></a>
-				
-				
-				</div>
+
+		<div class="pq-sm-10" style="overflow: hidden; padding: 20px; margin: 70px 0 120px; background: #f8dde3;">
+			<h5>The plugin is no longer supported</h5>
+			<p>Current plugin you can use "as is". All tools you can find in Profitquery all in one plugin with more features, free trial pro options and new dashboard, right now install most popular tools in one plugin by Profitquery for Wordpress community.</p>
+			<a href="https://wordpress.org/plugins/share-subscribe-contact-aio-widget/" target="_blank"><input type="button" class="btn_m_red" style="width: initial; margin: 20px auto 8px;" value="Download all in one Plugin"></a>
+	
+		</div>
 					<div class="pq_block" id="v1">
 					
 						<h4>Subscribe Tools</h4>
@@ -1516,11 +1501,7 @@ class ProfitQuerySubscribeWidgetsClass
 				</div>
 			</div>
 <div class="pq-container-fluid" id="free_profitquery" style="padding: 90px 0; margin-top: 80px;">
-	<div class="pq-sm-10" style="overflow: hidden; padding: 20px; margin: 30px 0 155px; background: white;">
-		<h5>For developer</h5>
-			<p>You can bind any enabled profitquery popup for any event on your website.This is wonderfull opportunity to make your website smarter. You can use Thank popup , Share popup, Follow us even Subscribe popup anywhere you want</p>
-		<a href="http://profitquery.com/developer.html" target="_blank"><input type="button" class="btn_m_white" value="Learn More"></a>
-		</div>
+
 	<div class="pq-sm-12">
 		<h4>More Tools from Profitquery</h4>
 		<div class="pq-sm-10" style="overflow: hidden; padding: 20px; margin: 30px 0 25px; background: white;">
@@ -1530,40 +1511,15 @@ class ProfitQuerySubscribeWidgetsClass
 			<a href="https://wordpress.org/plugins/share-subscribe-contact-aio-widget/" target="_blank"><input type="button" class="btn_m_white" value="Learn more"></a>
 		</div>
 		<div class="pq-sm-12 pq-items">
-		<div style="overflow: hidden; width: 100%; max-width: 740px; margin: 0 auto;">
-			<a href="http://profitquery.com/referral_system.html" target="_blank"><div class="pq-sm-6">
-					<img src="<?php echo plugins_url('images/referral_system.png', __FILE__);?>" />
-					<h5>Refferal System</h3>
-					<a href="http://profitquery.com/referral_system.html" target="_blank"><input type="button" class="btn_m_red" style="width: initial; margin: 12px auto 8px;" value="Learn more"></a>
-			</div></a>
-			<a href="http://profitquery.com/social_login.html" target="_blank"><div class="pq-sm-6" id="odd">
-					<img src="<?php echo plugins_url('images/social_login.png', __FILE__);?>" />
-					<h5>Social Login</h5>
-					<a href="http://profitquery.com/social_login.html" target="_blank"><input type="button" class="btn_m_red" style="width: initial; margin: 12px auto 8px;" value="Learn more"></a>
-			</div></a>
-			<a href="http://profitquery.com/trigger_mail.html" target="_blank"><div class="pq-sm-6">
-					<img src="<?php echo plugins_url('images/trigger_mail.png', __FILE__);?>" />
-					<h5>Trigger Mail</h3>
-					<a href="http://profitquery.com/trigger_mail.html" target="_blank"><input type="button" class="btn_m_red" style="width: initial; margin: 12px auto 8px;" value="Learn more"></a>
-			</div></a>
-			<a href="http://profitquery.com/product_discount.html" target="_blank"><div class="pq-sm-6" id="odd">
-					<img src="<?php echo plugins_url('images/product_discount.png', __FILE__);?>" />
-					<h5>Product Discount</h5>
-					<a href="http://profitquery.com/product_discount.html" target="_blank"><input type="button" class="btn_m_red" style="width: initial; margin: 12px auto 8px;" value="Learn more"></a>
-			</div></a>
-		</div>	
+
 		</div>
-		<div class="pq-sm-10" style="overflow: hidden; padding: 20px; margin: 30px 0 25px; background: white;">
-			<img src="<?php echo plugins_url('images/ecom.png', __FILE__);?>" />
-			
-			<h5>Free Profitquery Widgets for Ecommerce</h5>
-			<a href="http://profitquery.com/ecom.html" target="_blank"><input type="button" class="btn_m_white" value="Learn more"></a>
+
+	<div class="pq-sm-10" style="overflow: hidden; padding: 20px; margin: 30px 0 30px; background: white;">
+		<h5>For developer</h5>
+			<p>You can bind any enabled profitquery popup for any event on your website.This is wonderfull opportunity to make your website smarter. You can use Thank popup , Share popup, Follow us even Subscribe popup anywhere you want</p>
+		<a href="http://profitquery.com/developer.html" target="_blank"><input type="button" class="btn_m_white" value="Learn More"></a>
 		</div>
-		<div class="pq-sm-10" style="overflow: hidden; padding: 20px; margin: 70px 0 20px; background: #f8dde3;">
-			<h5 style="color: white; background: #008AFF; width: 100px; margin: 0 auto; line-height: 35px; font-size: 26px;">PRO</h5>
-			<h5>Get Profitquery Pro version</h5>
-			<a href="http://profitquery.com/promo.html" target="_blank"><input type="button" class="btn_m_red" style="width: initial; margin: 20px auto 8px;" value="Learn more"></a>
-		</div>
+		
 		<div class="pq-sm-10" style="overflow: hidden; padding: 20px; margin: 30px 0 25px; background: white;">				
 			<h5>Write your article. Promote your blog.</h5>
 			<p>Write your article. Promote your blog.You can write any article about Profitquery for your customers, friends and <a href="http://profitquery.com/blog.html#send" target="_blank">send </a> for us your link or content. We paste your work on our <a href="http://profitquery.com/blog.html" target="_blank">blog</a>. Use your native language.</p>
