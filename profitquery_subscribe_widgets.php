@@ -22,7 +22,7 @@
 * Plugin Name: Aweber Mailchimp Subscribe Bar + Exit Popup
 * Plugin URI: http://profitquery.com/subscribe_witgets.html
 * Description: Smarter mailchimp, aweber subscribe tools for collect customers email, e-mail list builder and growth followers. Bar and exit intent subscribe popup.
-* Version: 2.1.7
+* Version: 2.2
 *
 * Author: Profitquery Team <support@profitquery.com>
 * Author URI: http://profitquery.com/?utm_campaign=subscribe_widgets_wp
@@ -259,39 +259,51 @@ function profitquery_subscribe_widgets_insert_code(){
 		$additionalOptionText = 'profitquery.productOptions.disableGA = 1;';
 	}
 	print "
-	<script>	
-		(function () {
+	<script>
+	(function () {
+			var PQInit = function(){
+				profitquery.loadFunc.callAfterPQInit(function(){					
+					profitquery.loadFunc.callAfterPluginsInit(						
+						function(){							
+							PQLoadTools();
+						}
+						, ['//api.profitquery.com/plugins/aio.plugin.profitquery.min.js']
+					);
+				});
+			};
 			var s = document.createElement('script');
 			var _isPQLibraryLoaded = false;
 			s.type = 'text/javascript';
-			s.async = true;
-			s.src = '//litelib.profitquery.com/api/lite.profitquery.min.js?apiKey=".$profitquery[apiKey]."';
+			s.async = true;			
+			s.src = '//api.profitquery.com/lib/profitquery.min.js?version=v3.0.4&apiKey=".stripslashes($profitquery[apiKey])."';
 			s.onload = function(){
 				if ( !_isPQLibraryLoaded )
 				{					
 				  _isPQLibraryLoaded = true;				  
-				  profitquery.loadFunc.callAfterPQInit(function(){
-						".$additionalOptionText."
-						var smartWidgetsBoxObject = ".json_encode($profitquerySmartWidgetsStructure).";	
-						profitquery.widgets.smartWidgetsBox(smartWidgetsBoxObject);	
-					});
+				  PQInit();
 				}
 			}
 			s.onreadystatechange = function() {								
 				if ( !_isPQLibraryLoaded && (this.readyState == 'complete' || this.readyState == 'loaded') )
 				{					
-				  _isPQLibraryLoaded = true;
-					profitquery.loadFunc.callAfterPQInit(function(){
-						".$additionalOptionText."
-						var smartWidgetsBoxObject = ".json_encode($profitquerySmartWidgetsStructure).";	
-						profitquery.widgets.smartWidgetsBox(smartWidgetsBoxObject);	
-					});
+				  _isPQLibraryLoaded = true;				    
+					
+					PQInit();					
 				}
 			};
 			var x = document.getElementsByTagName('script')[0];						
 			x.parentNode.insertBefore(s, x);			
-		})();				
-	</script>
+		})();
+		
+		function PQLoadTools(){
+			profitquery.loadFunc.callAfterPQInit(function(){
+						".$additionalOptionText."
+						var smartWidgetsBoxObject = ".json_encode($profitquerySmartWidgetsStructure).";	
+						profitquery.widgets.smartWidgetsBox.init(smartWidgetsBoxObject);	
+					});
+		}
+	</script>	
+		
 	";
 }
 
