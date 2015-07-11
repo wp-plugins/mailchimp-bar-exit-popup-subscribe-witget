@@ -22,7 +22,7 @@
 * Plugin Name: Aweber Mailchimp Subscribe Bar + Exit Popup
 * Plugin URI: http://profitquery.com/subscribe_witgets.html
 * Description: Smarter mailchimp, aweber subscribe tools for collect customers email, e-mail list builder and growth followers. Bar and exit intent subscribe popup.
-* Version: 2.2
+* Version: 2.3.0
 *
 * Author: Profitquery Team <support@profitquery.com>
 * Author URI: http://profitquery.com/?utm_campaign=subscribe_widgets_wp
@@ -258,6 +258,18 @@ function profitquery_subscribe_widgets_insert_code(){
 	if((int)$profitquery[additionalOptions][enableGA] == 0 && isset($profitquery[additionalOptions])){
 		$additionalOptionText = 'profitquery.productOptions.disableGA = 1;';
 	}
+	
+	$url     = get_option('siteurl');
+    $urlobj  = parse_url($url);
+	$scheme = $urlobj[scheme];
+	
+	if($scheme == 'https'){
+		$PQlibSource = 'https://profitquery-a.akamaihd.net/lib/profitquery.min.js';
+		$PQPluginSource = 'https://profitquery-a.akamaihd.net/lib/plugins/aio.plugin.profitquery.min.js';
+	}else{
+		$PQlibSource = 'http://pq-cdn.profitquery.com/lib/profitquery.min.js';
+		$PQPluginSource = 'http://pq-cdn.profitquery.com/lib/plugins/aio.plugin.profitquery.min.js';
+	}
 	print "
 	<script>
 	(function () {
@@ -267,15 +279,16 @@ function profitquery_subscribe_widgets_insert_code(){
 						function(){							
 							PQLoadTools();
 						}
-						, ['//api.profitquery.com/plugins/aio.plugin.profitquery.min.js']
+						, ['".$PQPluginSource."']
 					);
 				});
 			};
 			var s = document.createElement('script');
 			var _isPQLibraryLoaded = false;
 			s.type = 'text/javascript';
-			s.async = true;			
-			s.src = '//api.profitquery.com/lib/profitquery.min.js?version=v3.0.4&apiKey=".stripslashes($profitquery[apiKey])."';
+			s.async = true;
+			s.profitqueryAPIKey = '".stripslashes($profitquery[apiKey])."';
+			s.src = '".$PQlibSource."';
 			s.onload = function(){
 				if ( !_isPQLibraryLoaded )
 				{					
